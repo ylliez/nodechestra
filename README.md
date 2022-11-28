@@ -1,4 +1,4 @@
-# Nodechestra - Prototype
+# Nodechestra
 ## Instructions
 1. Download [prototype folder](https://github.com/ylliez/CART451/tree/main/project/prototype) from GitHub
 2. Download [Max/MSP application](https://cycling74.com/downloads) (no need for subscription)
