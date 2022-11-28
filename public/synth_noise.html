@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Synth - Noise</title>
+  <link rel='stylesheet' type="text/css" href='index.css' />
+
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <div id="handpose">
+    <video id="capture" style="display: none"></video>
+    <canvas id="canvas" width="1280px" height="72px"></canvas>
+  </div>
+  <div id="titleDiv">NOISE</div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="synth_noise.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>N4M Synth</title>
+  <!-- <link rel='stylesheet' href='/css/style.css' /> -->
+</head>
+
+<body>
+  <h1><b>N4M Synth</b></h1>
+  <table style="width:500px">
+    <tr>
+      <th>OSC</th>
+      <th>I/O</th>
+      <th>Frequency</th>
+      <th>Duration</th>
+      <th>Hold</th>
+    </tr>
+    <tr>
+      <th scope="row"><b>OSC1</b></th>
+      <td><input type="button" alt="osc1" id="osc1IO" onclick="inputNum(this.alt, this.id, 1)"></input></td>
+      <td><input type="range" alt="osc1" id="osc1Freq" min="20" max="12600" value="440"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="osc1" id="osc1Dur" min="0" max="2000" value="500"
+          oninput="inputNum(this.alt, this.id, this.value)"></input>
+      <td><input type="checkbox" alt="osc1" id="osc1Hold" oninput="inputStr(this.alt, this.id, this.checked)"></input>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row"><b>OSC2</b></th>
+      <td><input type="button" alt="osc2" id="osc2IO" onclick="inputNum(this.alt, this.id, 1)"></input></td>
+      <td><input type="range" alt="osc2" id="osc2Freq" min="20" max="12600" value="880"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="osc2" id="osc2Dur" min="0" max="2000" value="500"
+          oninput="inputNum(this.alt, this.id, this.value)"></input>
+      <td><input type="checkbox" alt="osc2" id="osc2Hold" oninput="inputStr(this.alt, this.id, this.checked)"></input>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row"><b>OSC3</b></th>
+      <td><input type="button" alt="osc3" id="osc3IO" onclick="inputNum(this.alt, this.id, 1)"></input></td>
+      <td><input type="range" alt="osc3" id="osc3Freq" min="20" max="12600" value="1320"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="osc3" id="osc3Dur" min="0" max="2000" value="500"
+          oninput="inputNum(this.alt, this.id, this.value)"></input>
+      <td><input type="checkbox" alt="osc3" id="osc3Hold" oninput="inputStr(this.alt, this.id, this.checked)"></input>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row"><b>OSC4</b></th>
+      <td><input type="button" alt="osc4" id="osc4IO" onclick="inputNum(this.alt, this.id, 1)"></input></td>
+      <td><input type="range" alt="osc4" id="osc4Freq" min="20" max="12600" value="1780"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="osc4" id="osc4Dur" min="0" max="2000" value="500"
+          oninput="inputNum(this.alt, this.id, this.value)"></input>
+      <td><input type="checkbox" alt="osc4" id="osc4Hold" oninput="inputStr(this.alt, this.id, this.checked)"></input>
+      </td>
+    </tr>
+    <tr height=20px></tr>
+    <tr>
+      <th>WAVEFORM</th>
+      <th>Sine</th>
+      <th>Triangle</th>
+      <th>Sawtooth</th>
+      <th>Square</th>
+    </tr>
+    <tr>
+      <td><input type="range" alt="wave" id="waveform" min="0.0" max="3.0" step="0.01" value="0.0"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="radio" name="wave" id="waveSn" oninput="inputNum(this.name, this.id, 0)"></input></td>
+      <td><input type="radio" name="wave" id="waveTr" oninput="inputNum(this.name, this.id, 1)"></input></td>
+      <td><input type="radio" name="wave" id="waveSw" oninput="inputNum(this.name, this.id, 2)"></input></td>
+      <td><input type="radio" name="wave" id="waveSq" oninput="inputNum(this.name, this.id, 3)"></input></td>
+    </tr>
+    <tr height=20px></tr>
+    <tr>
+      <th>ENVELOPE</th>
+      <th>Attack</th>
+      <th>Decay</th>
+      <th>Sustain</th>
+      <th>Release</th>
+    </tr>
+    <tr>
+      <td></td>
+      <td><input type="range" alt="env" id="envA" min="0" max="1000" value="10"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="env" id="envD" min="0" max="1000" value="100"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="env" id="envS" min="0" max="1" step="0.01" value="0.8"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="env" id="envR" min="0" max="1000" value="500"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      </td>
+    </tr>
+    <tr height=20px></tr>
+    <tr>
+      <th>NOISE</th>
+      <th>Amount</th>
+      <th>Colour</th>
+    </tr>
+    <tr>
+      <td><input type="checkbox" alt="noise" id="noiseIO" oninput="inputStr(this.alt, this.id, this.checked)"></input>
+      </td>
+      <td><input type="range" alt="noise" id="noiseAmt" value="0"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="noise" id="noiseCol" value="0"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+    </tr>
+    <tr height=20px></tr>
+    <tr>
+      <th>DELAY</th>
+      <th>Amount</th>
+      <th>Level</th>
+      <th>Time</th>
+    </tr>
+    <tr>
+      <td><input type="checkbox" alt="del" id="delIO" oninput="inputStr(this.alt, this.id, this.checked)"></input></td>
+      <td><input type="range" alt="del" id="delAmt" value="0" oninput="inputNum(this.alt, this.id, this.value)"></input>
+      </td>
+      <td><input type="range" alt="del" id="delLvl" value="50"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="del" id="delTime" min="0" max="1000" value="250"
+          oninput="inputNum(this.alt, this.id, this.value)"></input>
+      </td>
+    </tr>
+    <tr height=20px></tr>
+    <tr>
+      <th>REVERB</th>
+      <th>Amount</th>
+      <th>Decay</th>
+      <th>Dampening</th>
+      <th>Diffusion</th>
+    </tr>
+    <tr>
+      <td><input type="checkbox" alt="rev" id="revIO" oninput="inputStr(this.alt, this.id, this.checked)"></input></td>
+      <td><input type="range" alt="rev" id="revAmt" value="0" oninput="inputNum(this.alt, this.id, this.value)"></input>
+      </td>
+      <td><input type="range" alt="rev" id="revDec" value="50"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="rev" id="revDamp" value="50"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+      <td><input type="range" alt="rev" id="revDiff" value="50"
+          oninput="inputNum(this.alt, this.id, this.value)"></input></td>
+    </tr>
+    <tr height=20px></tr>
+    <tr>
+      <th>ARPEGGIATOR</th>
+      <th>Rate</th>
+      <th>Direction</th>
+      <th>Octaves</th>
+    </tr>
+    <tr>
+      <td><input type="checkbox" alt="arp" id="arpIO" oninput="inputStr(this.alt, this.id, this.checked)"></input></td>
+      <td>
+        <input type="range" alt="arp" id="arpRate" value="200"
+          oninput="inputNum(this.alt, this.id, this.value)"></input>
+      </td>
+      <td>
+        <select name="arp" id="arpDir" onchange="inputNum(this.name, this.id, this.value)">
+          <option value="0">AS IS</option>
+          <option value="1">UP</option>
+          <option value="2">DOWN</option>
+          <option value="3">PAL</option>
+          <option value="4">RAND</option>
+        </select>
+      </td>
+      <td>
+        <select name="arp" id="arpOct" onchange="inputNum(this.name, this.id, this.value)">
+          <option value="0">1</option>
+          <option value="1">2</option>
+          <option value="2">3</option>
+          <!-- <option value="3">PAL</option>
+          <option value="4">RAND</option> -->
+        </select>
+      </td>
+    </tr>
+    <tr height=20px></tr>
+    <!-- <tr>
+      <th scope="row"><b>Amplitude</b></td>
+      <td id="k5">0.00</td>
+      <td id="k6">0.00</td>
+    </tr> -->
+    <!-- <td id="status_3"><img src="/img/sl-green.png"></td> -->
+  </table>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
+  <script src="./ws.js"></script>
+</body>
+
+</html>
