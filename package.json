@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node max_sockets.js"
+    "start": "node n4m_synth.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
