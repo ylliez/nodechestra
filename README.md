@@ -65,7 +65,7 @@ Bass/Basso: E2-C4
 - retest (& try in VSC terminal) -> NO : crash; issue w/ max-api usage --> try [max-api-or-not](https://github.com/dimitriaatos/max-api-or-not)
 - retest --> NO : crash, "Web process failed to bind to $PORT within 60 seconds of launch" ; just too slow
 - retest --> NO : still slow error despite build "succeeded" & "deploy" awa attempt to open app & access local host...
-
+- retest --> NO : still crash -->
 #### info
 [error codes](https://devcenter.heroku.com/articles/error-codes)
 [dynos](https://devcenter.heroku.com/articles/dynos)

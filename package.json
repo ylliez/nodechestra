@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node tester.js"
+    "start": "node public/index.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
