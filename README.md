@@ -57,13 +57,17 @@ Bass/Basso: E2-C4
 
 ### Other
 - [CSS toggle switch](https://www.w3schools.com/howto/howto_css_switch.asp) --> irrelevant
+- [favicon](https://icon-icons.com/icon/perfect-circle/53928)
 
 ## Deployment
 ### Heroku
 - Heroku set-up, tie repo & deploy --> NO : crash, issue with package.json start script ==> change to server script
 - retest (& try in VSC terminal) -> NO : crash; issue w/ max-api usage --> try [max-api-or-not](https://github.com/dimitriaatos/max-api-or-not)
+- retest --> NO : crash, "Web process failed to bind to $PORT within 60 seconds of launch" ; just too slow
+- retest --> NO : still slow error despite build "succeeded" & "deploy" awa attempt to open app & access local host...
 
-### other
+#### info
+[error codes](https://devcenter.heroku.com/articles/error-codes)
 [dynos](https://devcenter.heroku.com/articles/dynos)
 
 
