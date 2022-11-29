@@ -64,13 +64,13 @@ function onResults(results) {
 
             if (lipAp > 0.01) {
                 if (voiceMIDI != voiceMIDIEx) {
-                    socket.emit("voice", `voice ten 2 ${voiceMIDIEx} 0`);
+                    socket.emit("voice", `voice 2 ${voiceMIDIEx} 0`);
                     voiceMIDIEx = voiceMIDI
-                    socket.emit("voice", `voice ten 2 ${voiceMIDI} 80`);
+                    socket.emit("voice", `voice 2 ${voiceMIDI} 80`);
                 }
             }
             else {
-                socket.emit("voice", `voice ten 2 ${voiceMIDI} 0`);
+                socket.emit("voice", `voice 2 ${voiceMIDI} 0`);
                 voiceMIDIEx = 0
             }
         }
