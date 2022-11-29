@@ -19,7 +19,7 @@ const sockets = io.sockets.sockets;
 // const wss = new WebSocket.Server({ server });
 
 // import Max/MSP library
-const Max = require('max-api');
+const Max = require('max-api-or-not');
 Max.post("Max/MSP API loaded");
 
 // const readline = require("readline")

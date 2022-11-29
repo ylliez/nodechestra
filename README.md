@@ -38,16 +38,33 @@
 ### sound
 [MIDI notes & frequencies](https://www.inspiredacoustics.com/en/MIDI_note_numbers_and_center_frequencies)
 
-[vocal range](https://www.wikidoc.org/index.php/Vocal_range)
-Soprano: C4 - C6
-Mezzo-Soprano: A3 - A5
-Contralto: E3 - E5
-Tenor: C3 - C5
-Baritone: G2 - G4
-Bass: E2 - E4
+[vocal ranges](https://www.wikidoc.org/index.php/Vocal_range)
+Operatic:
+Soprano: C4-C6
+Mezzo-Soprano: A3-A5
+Contralto: E3-E5
+Tenor: C3-C5
+Baritone: G2-G4
+Bass: E2-E4
+
+Choral:
+Soprano: C4-A5
+Mezzo-Soprano: A3-F5
+Contralto: F3-D5
+Tenor: B2-G4
+Baritone: G2-E4
+Bass/Basso: E2-C4
 
 ### Other
 - [CSS toggle switch](https://www.w3schools.com/howto/howto_css_switch.asp) --> irrelevant
+
+## Deployment
+### Heroku
+- Heroku set-up, tie repo & deploy --> NO : crash, issue with package.json start script ==> change to server script
+- retest (& try in VSC terminal) -> NO : crash; issue w/ max-api usage --> try [max-api-or-not](https://github.com/dimitriaatos/max-api-or-not)
+
+### other
+[dynos](https://devcenter.heroku.com/articles/dynos)
 
 
 ## Issues
@@ -69,4 +86,7 @@ Bass: E2 - E4
         - https://blog.openreplay.com/rendering-real-time-data-with-vue-node-and-socket-io
     - React & IO:
         - https://www.freecodecamp.org/news/build-a-realtime-chat-app-with-react-express-socketio-and-harperdb/
+
+- clamp values? ([link1](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript), [link2](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment))
+
 
