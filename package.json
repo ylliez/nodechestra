@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node n4m_synth.js"
+    "start": "node tester.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
