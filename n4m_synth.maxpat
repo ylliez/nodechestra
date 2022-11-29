@@ -40,6 +40,20 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"id" : "obj-7",
+					"linecount" : 3,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1157.336105889743521, 368.0, 229.0, 49.0 ],
+					"presentation_linecount" : 4,
+					"text" : ";\rmax launchbrowser https://nodechestra.herokuapp.com/delay"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-198",
 					"maxclass" : "newobj",
 					"numinlets" : 0,
@@ -516,22 +530,22 @@
 					"patching_rect" : [ 1260.0, 836.0, 93.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 35.0, 263.0, 36.0, 22.0 ],
-					"text" : "0"
+					"text" : "1"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-122",
-					"linecount" : 3,
+					"linecount" : 4,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1230.5, 804.924038648605347, 107.0, 49.0 ],
+					"patching_rect" : [ 1230.5, 804.924038648605347, 107.0, 62.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 35.0, 230.0, 370.0, 22.0 ],
-					"text" : "J80bSEcz2B-9tIbtAAAP joined. 1 users connected"
+					"text" : "node.script: max-heroku-client.js: No such file or directory"
 				}
 
 			}
@@ -544,8 +558,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1202.0, 776.0, 120.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 35.0, 193.0, 134.0, 22.0 ],
-					"text" : "node.script"
+					"presentation_rect" : [ 35.0, 193.0, 134.0, 22.0 ]
 				}
 
 			}
@@ -1030,7 +1043,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 638.830611404445335, 678.783171574274775, 142.946178261880846, 22.0 ],
-					"text" : "voice bass 1 46 0"
+					"text" : "del delAmt 39.303124"
 				}
 
 			}
@@ -4193,6 +4206,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -8676,21 +8691,21 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "PanGt2.maxpat",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "PanSw2.maxpat",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "ReverbPlate.maxpat",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
@@ -8715,28 +8730,28 @@
 			}
 , 			{
 				"name" : "n4m_synth.js",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "n4m_synth_arp.maxpat",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "n4m_synth_poly.maxpat",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "n4m_synth_voice.maxpat",
-				"bootpath" : "~/Documents/GitHub/CU/CART451/nodechestra",
+				"bootpath" : "~/Documents/GitHub/nodechestra",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1

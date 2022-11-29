@@ -14,11 +14,14 @@
 - [Web Audio API synth](https://www.dabbmedia.com/web-audio/synth/)/[GH](https://github.com/dabbmedia/web-audio-synth)
 
 
-## Components
-- Waveform    hands     panning between waveforms       Rx continuous / Lx discrete         OK
-- Delay       hands     delay parameters                Ry amt / Lx time                    OK
-- Noise       hands     noise parameters                Ry amt / Lx colour                  OK
-- Reverb      pose      reverb parameters          Lsh amt / Lin dec / Rin dam / Rsh diff   OK
+## Parameters
+
+| parameter | function | detail | tool | implemented |
+| - | - | - | - | - |
+| Waveform  |  waveform panning |      Rx continuous / Lx discrete       |  hands   |  OK
+| Delay     | delay parameters          |      Ry amt / Lx time                  |  hands   |  OK
+| Noise     | noise parameters          |      Ry amt / Lx colour                |  hands   |  OK
+| Reverb    | reverb parameters         | Lsh amt / Lin dec / Rin dam / Rsh diff |  pose    |  OK
 
 
 ## Resources
@@ -66,13 +69,14 @@ Bass/Basso: E2-C4
 - retest --> NO : crash, "Web process failed to bind to $PORT within 60 seconds of launch" ; just too slow
 - retest --> NO : still slow error despite build "succeeded" & "deploy" awa attempt to open app & access local host...
 - retest --> NO : still crash -->
+
 #### info
 [error codes](https://devcenter.heroku.com/articles/error-codes)
 [dynos](https://devcenter.heroku.com/articles/dynos)
 
 
 ## Issues
-- function distribution --> OK : resolved by socket.io implementation
+- [x] function distribution --> OK : resolved by socket.io implementation
 - disconnect crash --> OK : resolved by socket.io implementation
 - s2c GUI value change --> NO : irrelevant due to compartmentalization
 - s2c audio feed --> NO : AFAIK not possible
