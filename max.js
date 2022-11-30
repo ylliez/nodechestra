@@ -9,8 +9,8 @@ const io = require("socket.io-client");
 // const socket = io("https://nodechestra.herokuapp.com/");
 // const socket = io("https://nodechestra.herokuapp.com/");
 
-// const socket = io.of("/max").connect('https://nodechestra.herokuapp.com');
-const socket = io.connect('https://nodechestra.herokuapp.com');
+// const socket = io.connect('https://nodechestra.herokuapp.com');
+const socket = io("/max").connect('https://nodechestra.herokuapp.com');
 socket.on("connect", () => {
   Max.post(`client ID: ${socket.id}`);
 });
