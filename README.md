@@ -82,7 +82,7 @@ Bass/Basso: E2-C4
 - s2c audio feed --> NO : AFAIK not possible
 - ML control --> OK : in process of implementation/debugging
 - Data control? --> TBD
-- Actual client network access --> TBD (Heroku deployment of GitHub repo)
+- Actual client network access --> TBD (Heroku deployment of GitHub repo) ==> CSC
 
 - routing : express routes &&/|| socket.io namespaces
 - namespaces vs. rooms

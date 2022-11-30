@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node public/index.js"
+    "start": "node max.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",

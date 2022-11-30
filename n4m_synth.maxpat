@@ -332,7 +332,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 191.139237999916077, 163.291137099266052, 50.0, 22.0 ],
-					"text" : "1 69. 0."
+					"text" : "2 57 0"
 				}
 
 			}
@@ -564,22 +564,21 @@
 					"patching_rect" : [ 1260.0, 836.0, 93.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 35.0, 263.0, 36.0, 22.0 ],
-					"text" : "1"
+					"text" : "2"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-122",
-					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1230.5, 804.924038648605347, 107.0, 49.0 ],
+					"patching_rect" : [ 1230.5, 804.924038648605347, 107.0, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 35.0, 230.0, 370.0, 22.0 ],
-					"text" : "patchcord outlet out of range: deleting patchcord"
+					"text" : "bass: bad number"
 				}
 
 			}
@@ -592,8 +591,7 @@
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1202.0, 776.0, 120.0, 22.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 35.0, 193.0, 134.0, 22.0 ],
-					"text" : "send"
+					"presentation_rect" : [ 35.0, 193.0, 134.0, 22.0 ]
 				}
 
 			}
@@ -1078,7 +1076,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 638.830611404445335, 678.783171574274775, 142.946178261880846, 22.0 ],
-					"text" : "voice bass 1 47 0"
+					"text" : "voice bass 1 48 0"
 				}
 
 			}
