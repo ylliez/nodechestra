@@ -131,6 +131,10 @@ io.on('connection', (socket) => {
   });
 });
 
+io.of("/max").on('connection', (socket) => {
+  console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
+});
+
 io.of("/voice").on('connection', (socket) => {
   console.log(`${socket.id} joined VOICE. ${io.engine.clientsCount} users connected`);
   // console.log(`${socket.id} joined ${socket.room}. ${io.engine.clientsCount} users connected`);
