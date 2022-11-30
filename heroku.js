@@ -142,7 +142,7 @@ io.of("/voice").on('connection', (socket) => {
     // console.log(event, args);
     // console.log(event);
     console.log(args);
-    io.of("/max").emit(args);
+    max.emit(args);
   });
 });
 
@@ -160,7 +160,7 @@ io.of("/delay").on('connection', (socket) => {
   console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => {
     console.log(event, args);
-    io.of("/max").emit(args);
+    io.of("/max").emit(event, args);
   });
 });
 
