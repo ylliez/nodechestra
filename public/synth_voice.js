@@ -1,6 +1,7 @@
 console.log(`nodechestra voice page loaded`);
 
-const socket = io("/voice");
+// const socket = io("/voice");
+const socket = io();
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
