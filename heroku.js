@@ -184,6 +184,6 @@ io.of("/waveform").on('connection', (socket) => {
   console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => {
     console.log(event, args);
-    // socket.of("/max").emit(args);
+    socket.of("/max").emit(args);
   });
 });
