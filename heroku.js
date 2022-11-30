@@ -48,16 +48,16 @@ app.use("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.ht
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 // function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 
-function attributionRoute(req, res, next) {
-  let routes = [`client`, `client_delay`, `client_reverb`];
-  let route = routes[Math.floor(Math.random() * routes.length)];
-  res.sendFile(__dirname + `/public/${route}.html`);
-}
+// function attributionRoute(req, res, next) {
+//   let routes = [`client`, `client_delay`, `client_reverb`];
+//   let route = routes[Math.floor(Math.random() * routes.length)];
+//   res.sendFile(__dirname + `/public/${route}.html`);
+// }
 
-// IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
-io.of("/").adapter.on("create-room", (room) => {
-  console.log(`room ${room} was created`);
-});
+// // IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
+// io.of("/").adapter.on("create-room", (room) => {
+//   console.log(`room ${room} was created`);
+// });
 
 io.on('connection', (socket) => {
   console.log(`${socket.id} joined. ${io.engine.clientsCount} users connected`);
