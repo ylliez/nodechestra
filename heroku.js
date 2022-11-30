@@ -35,7 +35,7 @@ const max = io.of('/max');
 app.use(express.static(__dirname + '/public'));
 app.use("/", defaultRoute);
 // app.use("/client", clientRoute);
-app.use("/attr", (req, res) { res.sendFile(__dirname + '/public/delay.html'); });
+app.use("/attr", (req, res) => { res.sendFile(__dirname + '/public/delay.html'); });
 app.use("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
 app.use("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
 app.use("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
