@@ -33,9 +33,9 @@ const max = io.of('/max');
 
 // serve pages from public dir
 app.use(express.static(__dirname + '/public'));
-// app.use("/", defaultRoute);
+app.use("/", defaultRoute);
 // app.use("/client", clientRoute);
-app.use("/attr", attributionRoute);
+app.use("/attr", (req, res) { res.sendFile(__dirname + '/public/delay.html'); });
 app.use("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
 app.use("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
 app.use("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
@@ -44,19 +44,19 @@ app.use("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_rever
 app.use("/vbass", (req, res) => { res.sendFile(__dirname + '/public/synth_vbass.html'); });
 app.use("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
 
-// function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
+// function defaultRoute
 // function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 
-function attributionRoute(req, res, next) {
-  let routes = [`client`, `client_delay`, `client_reverb`];
-  let route = routes[Math.floor(Math.random() * routes.length)];
-  res.sendFile(__dirname + `/public/${route}.html`);
-}
+// function attributionRoute(req, res, next) {
+//   let routes = [`client`, `client_delay`, `client_reverb`];
+//   let route = routes[Math.floor(Math.random() * routes.length)];
+//   res.sendFile(__dirname + `/public/${route}.html`);
+// }
 
-// IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
-io.of("/").adapter.on("create-room", (room) => {
-  console.log(`room ${room} was created`);
-});
+// // IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
+// io.of("/").adapter.on("create-room", (room) => {
+//   console.log(`room ${room} was created`);
+// });
 
 io.on('connection', (socket) => {
   console.log(`${socket.id} joined. ${io.engine.clientsCount} users connected`);
