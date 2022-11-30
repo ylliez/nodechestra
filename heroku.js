@@ -39,7 +39,7 @@ app.get("/", (req, res) => { res.sendFile(__dirname + '/public/delay.html'); });
 app.use("/attr", attributionRoute);
 app.get("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
 app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
-app.use("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
+app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
 app.use("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 app.use("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
 app.use("/vbass", (req, res) => { res.sendFile(__dirname + '/public/synth_vbass.html'); });
