@@ -98,3 +98,4 @@ Bass/Basso: E2-C4
 - clamp values? ([link1](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript), [link2](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment))
 
 
+Node modules on 
