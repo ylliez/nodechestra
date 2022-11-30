@@ -142,7 +142,7 @@ io.of("/voice").on('connection', (socket) => {
     // console.log(event, args);
     // console.log(event);
     console.log(args);
-    socket.of("/max").emit(args);
+    io.of("/max").emit(args);
   });
 });
 
