@@ -3,7 +3,8 @@ const express = require("express");
 let app = express();
 // import HTTP module, set port number & create server
 const http = require('http')
-const port = 4200;
+// const port = 4200;
+const port = process.env.PORT;
 let server = http.createServer(app);
 server.listen(port, () => { console.log('server listening on port ' + port); })
 const io = require('socket.io')(server);
