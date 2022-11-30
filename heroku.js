@@ -35,16 +35,16 @@ const max = io.of('/max');
 // app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules'));
-app.get("/", (req, res) => { res.sendFile(__dirname + '/public/delay.html'); });
+app.get("/", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 // app.use("/client", clientRoute);
 app.use("/attr", attributionRoute);
 app.get("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
 app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
 app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
-app.use("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
-app.use("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
-app.use("/vbass", (req, res) => { res.sendFile(__dirname + '/public/synth_vbass.html'); });
-app.use("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
+app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
+app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
+app.get("/vbass", (req, res) => { res.sendFile(__dirname + '/public/synth_vbass.html'); });
+app.get("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 // function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
@@ -180,6 +180,6 @@ io.of("/waveform").on('connection', (socket) => {
   console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => {
     console.log(event, args);
-    socket.of("/max").emit(args);
+    // socket.of("/max").emit(args);
   });
 });
