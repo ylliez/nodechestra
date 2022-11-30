@@ -1,6 +1,6 @@
 console.log(`nodechestra voice bass page loaded`);
 
-const socket = io("/vbass");
+const socket = io("/vbas");
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
@@ -45,28 +45,19 @@ function onResults(results) {
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiFaceLandmarks) {
-        // for (const landmarks of results.multiFaceLandmarks) {
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_TESSELATION, { color: '#C0C0C070', lineWidth: 1 });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_EYE, { color: '#FF3030' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_EYEBROW, { color: '#FF3030' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_RIGHT_IRIS, { color: '#FF3030' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_EYE, { color: '#30FF30' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_EYEBROW, { color: '#30FF30' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_LEFT_IRIS, { color: '#30FF30' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_FACE_OVAL, { color: '#E0E0E0' });
-        //     drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#E0E0E0' });
-        // }
         if (results.multiFaceLandmarks[0]) {
             let lipTop = results.multiFaceLandmarks[0][13];
             let lipBot = results.multiFaceLandmarks[0][14];
-            let lipAp = lipBot.y - lipTop.y
-            // console.log(lipBot.y - lipTop.y);
+            let lipAp = lipBot.y - lipTop.y;
+            // console.log(lipAp);
+            let lipMid = lipTop + (lipAp / 2);
+            // console.log(lipMid);
             canvasCtx.fillStyle = "#FF0000";
             canvasCtx.beginPath();
             canvasCtx.arc(lipTop.x * width, lipTop.y * height, 20, 0, 2 * Math.PI);
             canvasCtx.arc(lipBot.x * width, lipBot.y * height, 20, 0, 2 * Math.PI);
+            canvasCtx.arc(lipMid.x * width, lipMid.y * height, 20, 0, 2 * Math.PI);
             canvasCtx.fill();
-            // console.log(lipAp);
 
             voiceMIDI = Math.round((1 - lipTop.y) * numberNotes) + startNote;
             voiceVelocity = lipAp * 1000

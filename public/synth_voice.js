@@ -1,8 +1,9 @@
 console.log(`nodechestra voice page loaded`);
 
 // const socket = io("/voice");
-const socket = io();
 // const socket = io.connect('https://nodechestra.herokuapp.com/');
+const socket = io();
+// const socket = io("/synth-client");
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });

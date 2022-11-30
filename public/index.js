@@ -1,4 +1,3 @@
-
 console.log(`nodechestra client page loaded`);
 
 // const socket = io();
@@ -12,5 +11,3 @@ console.log(`nodechestra client page loaded`);
 // // socket.on("disconnect", () => {
 // //     console.log(socket.id); // undefined
 // // });
-
-

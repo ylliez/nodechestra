@@ -11,6 +11,7 @@ const io = require('socket.io')(server);
 const sockets = io.sockets.sockets;
 
 const max = io.of('/max');
+const synth = io.of('/synth-client');
 
 // const fs = require('fs');
 // const path = require("path");
@@ -43,8 +44,16 @@ app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_wav
 app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
 app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
-app.get("/vbass", (req, res) => { res.sendFile(__dirname + '/public/synth_vbass.html'); });
+app.get("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
 app.get("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
+
+const vbas = io.of('/vbas');
+const vbar = io.of('/vbar');
+const vten = io.of('/vten');
+const vcon = io.of('/vcon');
+const vmez = io.of('/vmez');
+const vsop = io.of('/vsop');
+
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 // function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
@@ -146,44 +155,63 @@ io.of("/voice").on('connection', (socket) => {
   });
 });
 
-io.of("/vbass").on('connection', (socket) => {
+vbas.on('connection', (socket) => {
   console.log(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { socket.of("/max").emit(args); });
+  socket.onAny((event, args) => { max.emit(args); });
 });
 
-io.of("/vten").on('connection', (socket) => {
+vbar.on('connection', (socket) => {
+  console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { max.emit(args); });
+});
+
+vten.on('connection', (socket) => {
   console.log(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { socket.of("/max").emit(args); });
+  socket.onAny((event, args) => { max.emit(args); });
 });
 
-io.of("/delay").on('connection', (socket) => {
-  console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    io.of("/max").emit(event, args);
-  });
-});
+vcon.on('connection', (socket) => {
+  console.log(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { max.emit(args); });
 
-io.of("/reverb").on('connection', (socket) => {
-  console.log(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    socket.of("/max").emit(args);
+  vmez.on('connection', (socket) => {
+    console.log(`${socket.id} joined MEZZO-SOP. ${io.engine.clientsCount} users connected`);
+    socket.onAny((event, args) => { max.emit(args); });
   });
-});
 
-io.of("/noise").on('connection', (socket) => {
-  console.log(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    socket.of("/max").emit(args);
+  vsop.on('connection', (socket) => {
+    console.log(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
+    socket.onAny((event, args) => { max.emit(args); });
   });
-});
 
-io.of("/waveform").on('connection', (socket) => {
-  console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    socket.to("/max").emit(args);
+  io.of("/delay").on('connection', (socket) => {
+    console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
+    socket.onAny((event, args) => {
+      console.log(event, args);
+      io.of("/max").emit(event, args);
+    });
   });
-});
+
+  io.of("/reverb").on('connection', (socket) => {
+    console.log(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
+    socket.onAny((event, args) => {
+      console.log(event, args);
+      socket.of("/max").emit(args);
+    });
+  });
+
+  io.of("/noise").on('connection', (socket) => {
+    console.log(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
+    socket.onAny((event, args) => {
+      console.log(event, args);
+      socket.of("/max").emit(args);
+    });
+  });
+
+  io.of("/waveform").on('connection', (socket) => {
+    console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
+    socket.onAny((event, args) => {
+      console.log(event, args);
+      socket.to("/max").emit(args);
+    });
+  });
