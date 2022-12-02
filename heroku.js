@@ -54,6 +54,7 @@ const vten = io.of('/vten');
 const vcon = io.of('/vcon');
 const vmez = io.of('/vmez');
 const vsop = io.of('/vsop');
+const delay = io.of("/delay");
 
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
@@ -186,7 +187,7 @@ vsop.on('connection', (socket) => {
   socket.onAny((event, args) => { max.emit(args); });
 });
 
-io.of("/delay").on('connection', (socket) => {
+delay.on('connection', (socket) => {
   console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => {
     console.log(event, args);
