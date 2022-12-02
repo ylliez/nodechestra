@@ -70,6 +70,8 @@ Bass/Basso: E2-C4
 - retest --> NO : still slow error despite build "succeeded" & "deploy" awa attempt to open app & access local host...
 - retest --> NO : still crash -->
 
+- 12/02: Deployed but H14 (no web processes running) --> subscribe to Eco Dynos & scale project dynos to 1 (https://devcenter.heroku.com/articles/scaling)
+
 #### info
 [error codes](https://devcenter.heroku.com/articles/error-codes)
 [dynos](https://devcenter.heroku.com/articles/dynos)

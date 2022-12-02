@@ -5,18 +5,19 @@ socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
 
-let width = innerWidth, height = innerHeight;
 const captureElement = document.getElementById('capture');
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
+let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
-// C3-C5 (48-72)
-let voiceMIDI = 48, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
-let midiArray = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72];
-let numberNotes = midiArray.length // 25
-let startNote = midiArray[0] // 48
+// tenor choral range: B2-G4 (47-67) // C3-C5 (48-72)
+let voiceMIDI = 47, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
+// let midiArray = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72];
+let midiArray = [47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67];
+let numberNotes = midiArray.length // 21
+let startNote = midiArray[0] // 47
 
 const faceMesh = new FaceMesh({
     locateFile: (file) => {

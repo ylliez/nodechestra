@@ -5,18 +5,33 @@ socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
 
-let width = innerWidth, height = innerHeight;
 const captureElement = document.getElementById('capture');
 const canvasElement = document.getElementById('canvas');
 const canvasCtx = canvasElement.getContext('2d');
+let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
-// E2-E4
+// Bass: E2-E4
+
 let voiceMIDI = 40, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
-let midiArray = [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64];
-let numberNotes = midiArray.length // 25
-let startNote = midiArray[0] // 40
+// // let midiArray = [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64];
+// let notes = ["C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6"]
+// let noteArray = [];
+// let midiArray = [];
+// let startRange = notes.indexOf("E2"), endRange = notes.indexOf("E4");
+// for (let i = startRange; i <= endRange; i++) {
+//     midiArray.push(i + 36);
+//     noteArray.push(notes[i])
+// }
+// let numberNotes = midiArray.length // 25
+// let startNote = midiArray[0] // 40
+let notes = new Notes("E2", "E4");
+console.log(notes.midiArray)
+console.log(notes.noteArray)
+console.log(notes.numberNotes)
+console.log(notes.startRange)
+console.log(notes.startNote)
 
 const faceMesh = new FaceMesh({
     locateFile: (file) => {
@@ -24,6 +39,7 @@ const faceMesh = new FaceMesh({
     }
 });
 faceMesh.setOptions({
+    selfieMode: true,
     maxNumFaces: 1,
     refineLandmarks: true,
     minDetectionConfidence: 0.5,

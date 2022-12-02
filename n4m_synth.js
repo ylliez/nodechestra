@@ -47,7 +47,8 @@ app.use("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_wav
 app.use("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
 app.use("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 app.use("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
-app.use("/vbass", (req, res) => { res.sendFile(__dirname + '/public/synth_vbass.html'); });
+app.use("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
+app.use("/vbar", (req, res) => { res.sendFile(__dirname + '/public/synth_vbar.html'); });
 app.use("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }

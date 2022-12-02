@@ -2,14 +2,42 @@ body {
     background-color: #000;
     margin: 0;
     padding: 0;
-    color: rgb(21, 255, 0);
 }
 
 #titleDiv {
+    font-size: 3em;
+    font-weight: bold;
+    /* color: rgb(21, 255, 0); */
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    height: inherit;
+    width: 100%;
+
+    /* left: 50vw; */
+    text-align: center;
+}
+
+#voiceDiv {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+.noteDiv {
     font-size: 2em;
     font-weight: bold;
-    z-index: 1;
+    color: rgb(0, 0, 0);
+    height: 4vh;
+    width: 100vw;
     position: absolute;
-    top: 0;
-    left: 50vw;
+    z-index: 1;
+}
+
+#canvas {
+    position: absolute;
+    z-index: 3;
 }

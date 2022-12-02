@@ -45,6 +45,7 @@ app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.
 app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
 app.get("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
+app.get("/vbar", (req, res) => { res.sendFile(__dirname + '/public/synth_vbar.html'); });
 app.get("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
 
 const vbas = io.of('/vbas');
