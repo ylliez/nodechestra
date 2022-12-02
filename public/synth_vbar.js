@@ -89,7 +89,7 @@ function onResults(results) {
             voiceMIDI = Math.floor((1 - lipTop.y) * numberNotes) + startNote;
             voiceVelocity = lipAp * 1000
 
-            console.log(voiceMIDI + "," + voiceMIDIEx + "," + voiceVelocity);
+            // console.log(voiceMIDI + "," + voiceMIDIEx + "," + voiceVelocity);
 
             if (lipAp > 0.01) {
                 if (voiceMIDI != voiceMIDIEx) {

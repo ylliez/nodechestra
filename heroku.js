@@ -164,7 +164,10 @@ vbas.on('connection', (socket) => {
 
 vbar.on('connection', (socket) => {
   console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
+  socket.onAny((event, args) => {
+    console.log(event, args);
+    max.emit(event, args);
+  });
 });
 
 vten.on('connection', (socket) => {
