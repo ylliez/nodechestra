@@ -85,7 +85,7 @@ function onResults(results) {
                 if (voiceMIDI != voiceMIDIEx) {
                     socket.emit("voice", `voice bass 1 ${voiceMIDIEx} 0`);
                     voiceMIDIEx = voiceMIDI
-                    socket.emit("voice", `voice bass 1 ${voiceMIDI} 80`);
+                    socket.emit("voice", `voice bass 1 ${voiceMIDI} 127`);
                 }
                 // else if (voiceVelocity != voiceVelocityEx) {
                 //     voiceVelocityEx = voiceVelocity
