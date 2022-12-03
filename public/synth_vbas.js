@@ -12,26 +12,23 @@ let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
-// Bass: E2-E4
-
-let voiceMIDI = 40, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
-// // let midiArray = [40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64];
-// let notes = ["C2", "C#2", "D2", "D#2", "E2", "F2", "F#2", "G2", "G#2", "A2", "A#2", "B2", "C3", "C#3", "D3", "D#3", "E3", "F3", "F#3", "G3", "G#3", "A3", "A#3", "B3", "C4", "C#4", "D4", "D#4", "E4", "F4", "F#4", "G4", "G#4", "A4", "A#4", "B4", "C5", "C#5", "D5", "D#5", "E5", "F5", "F#5", "G5", "G#5", "A5", "A#5", "B5", "C6"]
-// let noteArray = [];
-// let midiArray = [];
-// let startRange = notes.indexOf("E2"), endRange = notes.indexOf("E4");
-// for (let i = startRange; i <= endRange; i++) {
-//     midiArray.push(i + 36);
-//     noteArray.push(notes[i])
-// }
-// let numberNotes = midiArray.length // 25
-// let startNote = midiArray[0] // 40
+// bass: E2-E4
 let notes = new Notes("E2", "E4");
-console.log(notes.midiArray)
-console.log(notes.noteArray)
-console.log(notes.numberNotes)
-console.log(notes.startRange)
-console.log(notes.startNote)
+let numberNotes = notes.numberNotes
+let startNote = notes.startNote
+let voiceMIDI = startNote, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
+// make new div in voice div with height 1/25 of window height and of different color
+let voiceDiv = document.getElementById('voiceDiv')
+let noteDivHeight = height / numberNotes
+for (let i = 0; i < numberNotes; i++) {
+    let noteDiv = document.createElement('div');
+    noteDiv.setAttribute("class", "noteDiv");
+    noteDiv.style.height = `${noteDivHeight}px`;
+    noteDiv.style.bottom = `${noteDivHeight * i}px`;
+    noteDiv.style.backgroundColor = `hsl(${i * 360 / numberNotes}, 100%, 50%)`;
+    noteDiv.innerHTML = `${notes.noteArray[i]}`
+    voiceDiv.appendChild(noteDiv);
+}
 
 const faceMesh = new FaceMesh({
     locateFile: (file) => {
@@ -59,33 +56,37 @@ camera.start();
 function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiFaceLandmarks) {
+        for (const landmarks of results.multiFaceLandmarks) {
+            drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#000' });
+        }
         if (results.multiFaceLandmarks[0]) {
             let lipTop = results.multiFaceLandmarks[0][13];
             let lipBot = results.multiFaceLandmarks[0][14];
             let lipAp = lipBot.y - lipTop.y;
-            // console.log(lipAp);
-            let lipMid = lipTop + (lipAp / 2);
-            // console.log(lipMid);
-            canvasCtx.fillStyle = "#FF0000";
+            let lipMidX = Math.min(lipTop.x, lipBot.x) + Math.abs(lipTop.x - lipBot.x) / 2;
+            let lipMidY = lipTop.y + (lipAp / 2);
+            // canvasCtx.fillStyle = "#F00";
+            // canvasCtx.beginPath();
+            // canvasCtx.arc(lipTop.x * width, lipTop.y * height, 10, 0, 2 * Math.PI);
+            // canvasCtx.arc(lipBot.x * width, lipBot.y * height, 10, 0, 2 * Math.PI);
+            // canvasCtx.fill();
+            canvasCtx.fillStyle = "#FFF";
             canvasCtx.beginPath();
-            canvasCtx.arc(lipTop.x * width, lipTop.y * height, 20, 0, 2 * Math.PI);
-            canvasCtx.arc(lipBot.x * width, lipBot.y * height, 20, 0, 2 * Math.PI);
-            canvasCtx.arc(lipMid.x * width, lipMid.y * height, 20, 0, 2 * Math.PI);
+            canvasCtx.arc(lipMidX * width, lipMidY * height, 2, 0, 2 * Math.PI);
             canvasCtx.fill();
 
             voiceMIDI = Math.round((1 - lipTop.y) * numberNotes) + startNote;
             voiceVelocity = lipAp * 1000
             // if (voiceVelocity < 5) { voiceVelocity = 0; }
 
-            console.log(voiceMIDI + "," + voiceMIDIEx + "," + voiceVelocity);
+            // console.log(voiceMIDI + "," + voiceMIDIEx + "," + voiceVelocity);
 
             if (lipAp > 0.01) {
                 if (voiceMIDI != voiceMIDIEx) {
-                    socket.emit("voice", `voice bass 1 ${voiceMIDIEx} 0`);
+                    socket.emit("voice", `voice 1 ${voiceMIDIEx} 0`);
                     voiceMIDIEx = voiceMIDI
-                    socket.emit("voice", `voice bass 1 ${voiceMIDI} 127`);
+                    socket.emit("voice", `voice 1 ${voiceMIDI} 127`);
                 }
                 // else if (voiceVelocity != voiceVelocityEx) {
                 //     voiceVelocityEx = voiceVelocity
@@ -93,7 +94,7 @@ function onResults(results) {
                 // }
             }
             else {
-                socket.emit("voice", `voice bass 1 ${voiceMIDI} 0`);
+                socket.emit("voice", `voice 1 ${voiceMIDI} 0`);
                 voiceMIDIEx = 0
             }
             // if (lipAp > 0.005) {

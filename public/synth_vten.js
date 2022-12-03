@@ -36,6 +36,7 @@ const faceMesh = new FaceMesh({
     }
 });
 faceMesh.setOptions({
+    selfieMode: true,
     maxNumFaces: 1,
     refineLandmarks: true,
     minDetectionConfidence: 0.5,
@@ -76,13 +77,13 @@ function onResults(results) {
 
             if (lipAp > 0.01) {
                 if (voiceMIDI != voiceMIDIEx) {
-                    socket.emit("voice", `voice 2 ${voiceMIDIEx} 0`);
+                    socket.emit("voice", `voice 3 ${voiceMIDIEx} 0`);
                     voiceMIDIEx = voiceMIDI
-                    socket.emit("voice", `voice 2 ${voiceMIDI} 127`);
+                    socket.emit("voice", `voice 3 ${voiceMIDI} 127`);
                 }
             }
             else {
-                socket.emit("voice", `voice 2 ${voiceMIDI} 0`);
+                socket.emit("voice", `voice 3 ${voiceMIDI} 0`);
                 voiceMIDIEx = 0
             }
         }

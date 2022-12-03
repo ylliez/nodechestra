@@ -27,9 +27,7 @@ for (let i = 0; i < numberNotes; i++) {
     noteDiv.style.bottom = `${noteDivHeight * i}px`;
     noteDiv.style.backgroundColor = `hsl(${i * 360 / numberNotes}, 100%, 50%)`;
     noteDiv.innerHTML = `${notes.noteArray[i]}`
-    // noteDiv.innerHTML = `${notes.midiArray[i]}`
     voiceDiv.appendChild(noteDiv);
-    console.log(noteDiv.style.bottom)
 }
 
 const faceMesh = new FaceMesh({
@@ -58,7 +56,6 @@ camera.start();
 function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiFaceLandmarks) {
         for (const landmarks of results.multiFaceLandmarks) {
             drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#000' });
