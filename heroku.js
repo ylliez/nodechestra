@@ -47,6 +47,9 @@ app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_rever
 app.get("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
 app.get("/vbar", (req, res) => { res.sendFile(__dirname + '/public/synth_vbar.html'); });
 app.get("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
+app.get("/vcon", (req, res) => { res.sendFile(__dirname + '/public/synth_vcon.html'); });
+app.get("/vmez", (req, res) => { res.sendFile(__dirname + '/public/synth_vmez.html'); });
+app.get("/vsop", (req, res) => { res.sendFile(__dirname + '/public/synth_vsop.html'); });
 
 const vbas = io.of('/vbas');
 const vbar = io.of('/vbar');
