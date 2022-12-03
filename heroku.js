@@ -142,7 +142,7 @@ io.on('connection', (socket) => {
   });
 });
 
-io.of("/max").on('connection', (socket) => {
+max.on('connection', (socket) => {
   console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
 });
 
@@ -159,43 +159,37 @@ io.of("/voice").on('connection', (socket) => {
 
 vbas.on('connection', (socket) => {
   console.log(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 vbar.on('connection', (socket) => {
   console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    max.emit(event, args);
-  });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 vten.on('connection', (socket) => {
   console.log(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 vcon.on('connection', (socket) => {
   console.log(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 vmez.on('connection', (socket) => {
   console.log(`${socket.id} joined MEZZO-SOP. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 vsop.on('connection', (socket) => {
   console.log(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 delay.on('connection', (socket) => {
   console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    max.emit(event, args);
-  });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
 io.of("/reverb").on('connection', (socket) => {
