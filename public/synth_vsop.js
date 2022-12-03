@@ -1,6 +1,6 @@
-console.log(`nodechestra voice bass page loaded`);
+console.log(`nodechestra voice soprano page loaded`);
 
-const socket = io("/vbas");
+const socket = io("/vsop");
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
@@ -12,8 +12,8 @@ let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
-// bass: E2-C4
-let notes = new Notes("E2", "C4");
+// soprano : C4-A5
+let notes = new Notes("C4", "A5");
 let numberNotes = notes.numberNotes
 let startNote = notes.startNote
 let voiceMIDI = startNote, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
@@ -66,72 +66,26 @@ function onResults(results) {
             let lipAp = lipBot.y - lipTop.y;
             let lipMidX = Math.min(lipTop.x, lipBot.x) + Math.abs(lipTop.x - lipBot.x) / 2;
             let lipMidY = lipTop.y + (lipAp / 2);
-            // canvasCtx.fillStyle = "#F00";
-            // canvasCtx.beginPath();
-            // canvasCtx.arc(lipTop.x * width, lipTop.y * height, 10, 0, 2 * Math.PI);
-            // canvasCtx.arc(lipBot.x * width, lipBot.y * height, 10, 0, 2 * Math.PI);
-            // canvasCtx.fill();
+
             canvasCtx.fillStyle = "#FFF";
             canvasCtx.beginPath();
             canvasCtx.arc(lipMidX * width, lipMidY * height, 2, 0, 2 * Math.PI);
             canvasCtx.fill();
 
-            voiceMIDI = Math.round((1 - lipTop.y) * numberNotes) + startNote;
+            voiceMIDI = Math.floor((1 - lipTop.y) * numberNotes) + startNote;
             voiceVelocity = lipAp * 1000
-            // if (voiceVelocity < 5) { voiceVelocity = 0; }
-
-            // console.log(voiceMIDI + "," + voiceMIDIEx + "," + voiceVelocity);
 
             if (lipAp > 0.01) {
                 if (voiceMIDI != voiceMIDIEx) {
-                    socket.emit("voice", `voice 1 ${voiceMIDIEx} 0`);
+                    socket.emit("voice", `voice 6 ${voiceMIDIEx} 0`);
                     voiceMIDIEx = voiceMIDI
-                    socket.emit("voice", `voice 1 ${voiceMIDI} 127`);
+                    socket.emit("voice", `voice 6 ${voiceMIDI} 127`);
                 }
-                // else if (voiceVelocity != voiceVelocityEx) {
-                //     voiceVelocityEx = voiceVelocity
-                //     socket.emit("voice", `voice1 ${voiceMIDI} ${voiceVelocity}`);
-                // }
             }
             else {
-                socket.emit("voice", `voice 1 ${voiceMIDI} 0`);
+                socket.emit("voice", `voice 6 ${voiceMIDI} 0`);
                 voiceMIDIEx = 0
             }
-            // if (lipAp > 0.005) {
-            //     if (voiceMIDI != voiceMIDIEx) {
-            //         socket.emit("voice", `voice1 ${voiceMIDIEx} 0`);
-            //         voiceMIDIEx = voiceMIDI
-            //         socket.emit("voice", `voice1 ${voiceMIDI} ${voiceVelocity}`);
-            //     }
-            //     // else if (voiceVelocity != voiceVelocityEx) {
-            //     //     voiceVelocityEx = voiceVelocity
-            //     //     socket.emit("voice", `voice1 ${voiceMIDI} ${voiceVelocity}`);
-            //     // }
-            // }
-            // else {
-            //     socket.emit("voice", `voice1 ${voiceMIDI} 0`);
-            //     voiceMIDIEx = 0
-            // }
-
-            // if (lipAp > 0.005) {
-            //     if (voiceMIDI != voiceMIDIEx) {
-            //         socket.emit("voice", `vbass vbassFreq ${voiceMIDIEx}`);
-            //         socket.emit("voice", `vbass vbassVel 0.0`);
-            //         voiceMIDIEx = voiceMIDI
-            //         socket.emit("voice", `vbass vbassFreq ${voiceMIDI}`);
-            //         socket.emit("voice", `vbass vbassVel ${voiceVelocity}`);
-            //     }
-            //     else if (voiceVelocity != voiceVelocityEx) {
-            //         voiceVelocityEx = voiceVelocity
-            //         socket.emit("voice", `vbass vbassFreq ${voiceMIDI}`);
-            //         socket.emit("voice", `vbass vbassVel ${voiceVelocity}`);
-            //     }
-            // }
-            // else {
-            //         socket.emit("voice", `vbass vbassFreq ${voiceMIDIEx}`);
-            //         socket.emit("voice", `vbass vbassVel 0.0`);
-            //     voiceMIDIEx = 0
-            // }
         }
         canvasCtx.restore();
     }
