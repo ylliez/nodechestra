@@ -12,11 +12,11 @@ let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
-// baritone choral range: G2-E4 (43-64) 22
+// baritone : G2-E4 (43-64) 22
 let notes = new Notes("G2", "E4");
 let numberNotes = notes.numberNotes
 let startNote = notes.startNote
-let voiceMIDI = 43, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
+let voiceMIDI = startNote, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
 // make new div in voice div with height 1/25 of window height and of different color
 let voiceDiv = document.getElementById('voiceDiv')
 let noteDivHeight = height / numberNotes
@@ -26,8 +26,8 @@ for (let i = 0; i < numberNotes; i++) {
     noteDiv.style.height = `${noteDivHeight}px`;
     noteDiv.style.bottom = `${noteDivHeight * i}px`;
     noteDiv.style.backgroundColor = `hsl(${i * 360 / numberNotes}, 100%, 50%)`;
-    // noteDiv.innerHTML = `${notes.noteArray[i]}`
-    noteDiv.innerHTML = `${notes.midiArray[i]}`
+    noteDiv.innerHTML = `${notes.noteArray[i]}`
+    // noteDiv.innerHTML = `${notes.midiArray[i]}`
     voiceDiv.appendChild(noteDiv);
     console.log(noteDiv.style.bottom)
 }
@@ -60,22 +60,21 @@ function onResults(results) {
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
     // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     if (results.multiFaceLandmarks) {
+        for (const landmarks of results.multiFaceLandmarks) {
+            drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#000' });
+        }
         if (results.multiFaceLandmarks[0]) {
             let lipTop = results.multiFaceLandmarks[0][13];
-            // console.log(lipTop);
             let lipBot = results.multiFaceLandmarks[0][14];
             let lipAp = lipBot.y - lipTop.y;
-            // console.log(lipAp);
             let lipMidX = Math.min(lipTop.x, lipBot.x) + Math.abs(lipTop.x - lipBot.x) / 2;
             let lipMidY = lipTop.y + (lipAp / 2);
-            // console.log(lipMid);
-            canvasCtx.fillStyle = "#F00";
-            canvasCtx.beginPath();
-            canvasCtx.arc(lipTop.x * width, lipTop.y * height, 20, 0, 2 * Math.PI);
-            canvasCtx.arc(lipBot.x * width, lipBot.y * height, 20, 0, 2 * Math.PI);
-            // canvasCtx.arc(lipMidX * width, lipMidY * height, 20, 0, 2 * Math.PI);
-            canvasCtx.fill();
-            canvasCtx.fillStyle = "#000";
+            // canvasCtx.fillStyle = "#F00";
+            // canvasCtx.beginPath();
+            // canvasCtx.arc(lipTop.x * width, lipTop.y * height, 10, 0, 2 * Math.PI);
+            // canvasCtx.arc(lipBot.x * width, lipBot.y * height, 10, 0, 2 * Math.PI);
+            // canvasCtx.fill();
+            canvasCtx.fillStyle = "#FFF";
             canvasCtx.beginPath();
             canvasCtx.arc(lipMidX * width, lipMidY * height, 2, 0, 2 * Math.PI);
             canvasCtx.fill();
@@ -93,13 +92,13 @@ function onResults(results) {
 
             if (lipAp > 0.01) {
                 if (voiceMIDI != voiceMIDIEx) {
-                    socket.emit("voice", `voice bar 2 ${voiceMIDIEx} 0`);
+                    socket.emit("voice", `voice 2 ${voiceMIDIEx} 0`);
                     voiceMIDIEx = voiceMIDI
-                    socket.emit("voice", `voice bar 2 ${voiceMIDI} 80`);
+                    socket.emit("voice", `voice 2 ${voiceMIDI} 127`);
                 }
             }
             else {
-                socket.emit("voice", `voice bar 2 ${voiceMIDI} 0`);
+                socket.emit("voice", `voice 2 ${voiceMIDI} 0`);
                 voiceMIDIEx = 0
             }
         }
