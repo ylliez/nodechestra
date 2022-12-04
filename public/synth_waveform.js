@@ -12,6 +12,26 @@ let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
+// tenor : B2-G4 (47-67) // C3-C5 (48-72)
+// let waves = [0, 1, 2, 3];
+// let waves = [0.75, 1.5, 2.25];
+let waves = [0, 0.75, 1.5, 2.25, 3];
+let numberWaves = waves.length
+let startWaves = waves[0]
+let voiceMIDI = startWaves;
+// make new div in voice div with height 1/25 of window height and of different color
+let uiDiv = document.getElementById('uiDiv')
+let waveDivWidth = width / numberWaves
+for (let i = 0; i < numberWaves; i++) {
+    let waveDiv = document.createElement('div');
+    waveDiv.setAttribute("class", "waveDiv");
+    waveDiv.style.width = `${waveDivWidth}px`;
+    waveDiv.style.left = `${waveDivWidth * i}px`;
+    waveDiv.style.backgroundColor = `hsl(${i * 360 / numberWaves}, 100%, 50%)`;
+    //  waveDiv.innerHTML = `${notes.noteArray[i]}`
+    uiDiv.appendChild(waveDiv);
+}
+
 const hands = new Hands({
     locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`;

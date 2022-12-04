@@ -1,3 +1,6 @@
+// import Max/MSP library
+const Max = require('max-api-or-not');
+Max.post("Max/MSP API loaded");
 // import Express module & make instance
 const express = require("express");
 let app = express();
@@ -8,48 +11,23 @@ let server = http.createServer(app);
 server.listen(port, () => { Max.post('server listening on port ' + port); })
 const io = require('socket.io')(server);
 const sockets = io.sockets.sockets;
-// const nsp = io.of('/delay');
-
-// const fs = require('fs');
-// const path = require("path");
-// const static = require('node-static');
-
-// // import WebSocket library & make instance
-// const WebSocket = require("ws");
-// const wss = new WebSocket.Server({ server });
-
-// import Max/MSP library
-const Max = require('max-api-or-not');
-Max.post("Max/MSP API loaded");
-
-// const readline = require("readline")
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   terminal: false
-// })
-// rl.on("line", async line => {
-//   // This will be posted to the Max console
-//   await console.log(line)
-// })
-
-// const cookieParser = require("cookie-parser");
-// const bodyParser = require("body-parser");
-
-
 
 // serve pages from public dir
 app.use(express.static(__dirname + '/public'));
 // app.use("/", defaultRoute);
 // app.use("/client", clientRoute);
 app.use("/attr", attributionRoute);
-app.use("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
-app.use("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
-app.use("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
-app.use("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
-app.use("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
-app.use("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
-app.use("/vbar", (req, res) => { res.sendFile(__dirname + '/public/synth_vbar.html'); });
-app.use("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
+app.get("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
+app.get("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
+app.get("/vbar", (req, res) => { res.sendFile(__dirname + '/public/synth_vbar.html'); });
+app.get("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
+app.get("/vcon", (req, res) => { res.sendFile(__dirname + '/public/synth_vcon.html'); });
+app.get("/vmez", (req, res) => { res.sendFile(__dirname + '/public/synth_vmez.html'); });
+app.get("/vsop", (req, res) => { res.sendFile(__dirname + '/public/synth_vsop.html'); });
+app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
+app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
+app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
+app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 // function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
@@ -60,9 +38,21 @@ function attributionRoute(req, res, next) {
   res.sendFile(__dirname + `/public/${route}.html`);
 }
 
+const max = io.of('/max');
+const vbas = io.of('/vbas');
+const vbar = io.of('/vbar');
+const vten = io.of('/vten');
+const vcon = io.of('/vcon');
+const vmez = io.of('/vmez');
+const vsop = io.of('/vsop');
+const waveform = io.of("/waveform");
+const noise = io.of("/noise");
+const delay = io.of("/delay");
+const reverb = io.of("/reverb");
+
 // IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
 io.of("/").adapter.on("create-room", (room) => {
-  console.log(`room ${room} was created`);
+  Max.post(`room ${room} was created`);
 });
 
 io.on('connection', (socket) => {
@@ -136,55 +126,52 @@ io.on('connection', (socket) => {
   });
 });
 
-io.of("/voice").on('connection', (socket) => {
-  Max.post(`${socket.id} joined VOICE. ${io.engine.clientsCount} users connected`);
-  // Max.post(`${socket.id} joined ${socket.room}. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    // Max.post(event, args);
-    // Max.post(event);
-    Max.post(args);
-    Max.outlet(args);
-  });
-});
-
-io.of("/vbass").on('connection', (socket) => {
+vbas.on('connection', (socket) => {
   Max.post(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(args); });
+  socket.onAny((event, args) => { Max.outlet(event, args); });
 });
 
-io.of("/vten").on('connection', (socket) => {
+vbar.on('connection', (socket) => {
+  Max.post(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(event, args); });
+});
+
+vten.on('connection', (socket) => {
   Max.post(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(args); });
+  socket.onAny((event, args) => { Max.outlet(event, args); });
 });
 
-io.of("/delay").on('connection', (socket) => {
+vcon.on('connection', (socket) => {
+  Max.post(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(event, args); });
+});
+
+vmez.on('connection', (socket) => {
+  Max.post(`${socket.id} joined MEZZO-SOP. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(event, args); });
+});
+
+vsop.on('connection', (socket) => {
+  Max.post(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(event, args); });
+});
+
+delay.on('connection', (socket) => {
   Max.post(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    Max.post(event, args);
-    Max.outlet(args);
-  });
+  socket.onAny((event, args) => { Max.outlet(event, args); });
 });
 
-io.of("/reverb").on('connection', (socket) => {
+reverb.on('connection', (socket) => {
   Max.post(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    Max.post(event, args);
-    Max.outlet(args);
-  });
+  socket.onAny((event, args) => { Max.outlet(event, args); });
 });
 
-io.of("/noise").on('connection', (socket) => {
+noise.on('connection', (socket) => {
   Max.post(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    Max.post(event, args);
-    Max.outlet(args);
-  });
+  socket.onAny((event, args) => { Max.outlet(event, args); });
 });
 
-io.of("/waveform").on('connection', (socket) => {
+waveform.on('connection', (socket) => {
   Max.post(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    Max.post(event, args);
-    Max.outlet(args);
-  });
+  socket.onAny((event, args) => { Max.outlet(event, args); });
 });

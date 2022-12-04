@@ -19,7 +19,7 @@ const hands = new Hands({
 });
 hands.setOptions({
     selfieMode: true,
-    maxNumHands: 2,
+    maxNumHands: 1,
     modelComplexity: 1,
     minDetectionConfidence: 0.5,
     minTrackingConfidence: 0.5
@@ -38,27 +38,17 @@ camera.start();
 function onResults(results) {
     canvasCtx.save();
     canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-    // video feed
-    // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
     let handsOn = results.multiHandedness.length
     if (handsOn) {
         for (let i = 0; i < handsOn; i++) {
             let indexTip = results.multiHandLandmarks[i][8];
-            if (results.multiHandedness[i].label === `Right`) {
-                canvasCtx.fillStyle = "#FF0000";
-                canvasCtx.beginPath();
-                canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
-                canvasCtx.fill();
-                socket.emit("noise", `noise noiseAmt ${(1 - indexTip.y) * 100}`);
-            }
-            if (results.multiHandedness[i].label === `Left`) {
-                canvasCtx.fillStyle = "#00FF00";
-                canvasCtx.beginPath();
-                canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
-                canvasCtx.fill();
-                socket.emit("noise", `noise noiseCol ${indexTip.x * 100}`);
-
-            }
+            canvasCtx.fillStyle = "#000";
+            canvasCtx.beginPath();
+            canvasCtx.arc(indexTip.x * width, indexTip.y * height, 10, 0, 2 * Math.PI);
+            canvasCtx.fill();
+            socket.emit("noise", `noise noiseAmt ${(1 - indexTip.y) * 100}`);
+            socket.emit("noise", `noise noiseCol ${indexTip.x * 100}`);
+            canvasElement.style.backgroundColor = `rgba(255,${(1 - indexTip.x) * 255},255,${1 - indexTip.y})`;
         }
         canvasCtx.restore();
     }

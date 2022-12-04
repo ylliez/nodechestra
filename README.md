@@ -98,6 +98,7 @@ Bass/Basso: E2-C4
         - https://www.freecodecamp.org/news/build-a-realtime-chat-app-with-react-express-socketio-and-harperdb/
 
 - clamp values? ([link1](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript), [link2](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment))
-
+- draw UI elements of MediaPipe 
+    - lips: https://github.com/google/mediapipe/issues/2040
 
 Node modules on 

@@ -10,64 +10,42 @@ server.listen(port, () => { console.log('server listening on port ' + port); })
 const io = require('socket.io')(server);
 const sockets = io.sockets.sockets;
 
-const max = io.of('/max');
-const synth = io.of('/synth-client');
-
-// const fs = require('fs');
-// const path = require("path");
-// const static = require('node-static');
-
-// const readline = require("readline")
-// const rl = readline.createInterface({
-//   input: process.stdin,
-//   terminal: false
-// })
-// rl.on("line", async line => {
-//   // This will be posted to the Max console
-//   await console.log(line)
-// })
-
-// const cookieParser = require("cookie-parser");
-// const bodyParser = require("body-parser");
-
-
-
 // serve pages from public dir
-// app.use(express.static(__dirname));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules'));
 app.get("/", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
-// app.use("/client", clientRoute);
+// app.use("/client", (req, res) => { res.sendFile(__dirname + '/public/client.html'); }
 app.use("/attr", attributionRoute);
 app.get("/voice", (req, res) => { res.sendFile(__dirname + '/public/synth_voice.html'); });
-app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
-app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
-app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
-app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
 app.get("/vbas", (req, res) => { res.sendFile(__dirname + '/public/synth_vbas.html'); });
 app.get("/vbar", (req, res) => { res.sendFile(__dirname + '/public/synth_vbar.html'); });
 app.get("/vten", (req, res) => { res.sendFile(__dirname + '/public/synth_vten.html'); });
 app.get("/vcon", (req, res) => { res.sendFile(__dirname + '/public/synth_vcon.html'); });
 app.get("/vmez", (req, res) => { res.sendFile(__dirname + '/public/synth_vmez.html'); });
 app.get("/vsop", (req, res) => { res.sendFile(__dirname + '/public/synth_vsop.html'); });
+app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_waveform.html'); });
+app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
+app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
+app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
 
+// function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
+function attributionRoute(req, res, next) {
+  let routes = [`client`, `client_delay`, `client_reverb`];
+  let route = routes[Math.floor(Math.random() * routes.length)];
+  res.sendFile(__dirname + `/public/${route}.html`);
+}
+
+const max = io.of('/max');
 const vbas = io.of('/vbas');
 const vbar = io.of('/vbar');
 const vten = io.of('/vten');
 const vcon = io.of('/vcon');
 const vmez = io.of('/vmez');
 const vsop = io.of('/vsop');
+const waveform = io.of("/waveform");
+const noise = io.of("/noise");
 const delay = io.of("/delay");
-
-
-// function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
-// function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
-
-function attributionRoute(req, res, next) {
-  let routes = [`client`, `client_delay`, `client_reverb`];
-  let route = routes[Math.floor(Math.random() * routes.length)];
-  res.sendFile(__dirname + `/public/${route}.html`);
-}
+const reverb = io.of("/reverb");
 
 // // IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
 // io.of("/").adapter.on("create-room", (room) => {
@@ -128,7 +106,7 @@ io.on('connection', (socket) => {
     // console.log(event, args);
     // console.log(event);
     console.log(args);
-    // socket.of("/max").emit(args);
+    // max.emit(event, args);
   });
 
   // socket.on("inputNum", (args) => {
@@ -149,16 +127,16 @@ max.on('connection', (socket) => {
   console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
 });
 
-io.of("/voice").on('connection', (socket) => {
-  console.log(`${socket.id} joined VOICE. ${io.engine.clientsCount} users connected`);
-  // console.log(`${socket.id} joined ${socket.room}. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    // console.log(event, args);
-    // console.log(event);
-    console.log(args);
-    max.emit(args);
-  });
-});
+// io.of("/voice").on('connection', (socket) => {
+//   console.log(`${socket.id} joined VOICE. ${io.engine.clientsCount} users connected`);
+//   // console.log(`${socket.id} joined ${socket.room}. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => {
+//     // console.log(event, args);
+//     // console.log(event);
+//     console.log(args);
+//     max.emit(event, args);
+//   });
+// });
 
 vbas.on('connection', (socket) => {
   console.log(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
@@ -195,26 +173,17 @@ delay.on('connection', (socket) => {
   socket.onAny((event, args) => { max.emit(event, args); });
 });
 
-io.of("/reverb").on('connection', (socket) => {
+reverb.on('connection', (socket) => {
   console.log(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    socket.of("/max").emit(args);
-  });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
-io.of("/noise").on('connection', (socket) => {
+noise.on('connection', (socket) => {
   console.log(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    socket.of("/max").emit(args);
-  });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
 
-io.of("/waveform").on('connection', (socket) => {
+waveform.on('connection', (socket) => {
   console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(event, args);
-    socket.to("/max").emit(args);
-  });
+  socket.onAny((event, args) => { max.emit(event, args); });
 });
