@@ -18,7 +18,7 @@ socket.on("connect", () => {
 socket.onAny((args) => {
   // Max.post(event, args);
   // Max.post(event);
-  Max.post(args);
+  // Max.post(args);
   Max.outlet(args);
 });
 
