@@ -53,13 +53,13 @@ for (let i = 0; i < io_nsp.length; i++) {
   io_nsp[i].conns = 0;
 }
 
-// io.on('connection', (socket) => {
-//   for (let i = 0; i < io_nsp.length; i++) {
-//     if (io_nsp[i].conns >= 1) {
-//       socket.emit(`connFull`, `${io_nsp_tag[i]}`)
-//     }
-//   }
-// });
+io.on('connection', (socket) => {
+  for (let i = 0; i < io_nsp.length; i++) {
+    if (io_nsp[i].conns >= 1) {
+      socket.emit(`connFull`, `${io_nsp_tag[i]}`)
+    }
+  }
+});
 
 // max.on('connection', (socket) => {
 //   console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
@@ -90,15 +90,15 @@ for (let i = 0; i < io_nsp.length; i++) {
 //   });
 // }
 
-io.on('connection', (socket) => {
-  console.log(`${socket.id} joined. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => {
-    console.log(args);
-  });
-  socket.on("disconnecting", (reason) => {
-    console.log(`${socket.id} left. ${io.engine.clientsCount} users connected`);
-  });
-});
+// io.on('connection', (socket) => {
+//   console.log(`${socket.id} joined. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => {
+//     console.log(args);
+//   });
+//   socket.on("disconnecting", (reason) => {
+//     console.log(`${socket.id} left. ${io.engine.clientsCount} users connected`);
+//   });
+// });
 
 max.on('connection', (socket) => {
   console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
@@ -114,13 +114,34 @@ vbas.on('connection', (socket) => {
 });
 
 vbar.on('connection', (socket) => {
-  console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-  socket.on("disconnect", () => {
-    max.emit(`voice 2 0 0`);
-    console.log(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
-  });
+  if (vbar.conns >= 1) {
+    Max.post(`${socket.id} tried to join BARITONE but already occupied`);
+    socket.emit("reject");
+  } else {
+    socket.emit("accept");
+    vbar.conns++;
+    Max.post(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+    io.emit(`connFull`, `vbar`)
+    socket.onAny((event, args) => {
+      Max.outlet(args);
+    });
+    socket.on("disconnect", () => {
+      Max.outlet(`voice 2 0 0`);
+      Max.post(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
+      io.emit(`connOpen`, `vbar`)
+      vbar.conns--;
+    });
+  }
 });
+
+// vbar.on('connection', (socket) => {
+//   console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+//   socket.on("disconnect", () => {
+//     max.emit(`voice 2 0 0`);
+//     console.log(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
+//   });
+// });
 
 vten.on('connection', (socket) => {
   console.log(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
