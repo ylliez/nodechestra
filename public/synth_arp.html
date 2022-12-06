@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Synth - Waveform</title>
+    <title>Synth - Arpeggiator</title>
     <link rel='stylesheet' type="text/css" href='index.css' />
 
     <style>
@@ -10,11 +10,12 @@
             display: flex;
             flex-direction: row;
             background-color: rgb(21, 255, 0);
+            top: 50vh
         }
 
         .bar {
             width: 25vw;
-            height: 100vh;
+            height: 50vh;
             text-align: center;
             background-color: black;
         }
@@ -32,17 +33,13 @@
         <canvas id="canvas" width="1280px" height="720px"></canvas>
     </div>
     <div id="uiDiv">
-        <!-- <img src="assets/wave_sin.svg" class="wave" id="sin"></img>
-        <img src="assets/wave_tri.svg" class="wave" id="tri"></img>
-        <img src="assets/wave_saw.svg" class="wave" id="saw"></img>
-        <img src="assets/wave_sqr.svg" class="wave" id="sqr"></img> -->
-        <!-- <svg src="assets/wave_sqr.svg" class="wave" id="sqr"></svg> -->
-        <div class="bar" id="waveSn"></div>
-        <div class="bar" id="waveTr"></div>
-        <div class="bar" id="waveSw"></div>
-        <div class="bar" id="waveSq"></div>
+        <div class="bar" id="waveSn">SINE</div>
+        <div class="bar" id="waveTr">TRIANGLE</div>
+        <div class="bar" id="waveSw">SAWTOOTH</div>
+        <div class="bar" id="waveSq">SQUARE</div>
     </div>
-    <div id="titleDiv">WAVEFORM</div>
+    <div id="titleDiv">ARPEGGIATOR</div>
+    <!-- <div id="instructionDiv">right hand: continuous pan | left hand: discrete pan</div> -->
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="synth_waveform.js"></script>

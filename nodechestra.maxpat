@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 35.0, 79.0, 816.0, 787.0 ],
+		"rect" : [ 1474.0, -14.0, 1375.0, 960.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -208,16 +208,16 @@
 			}
 , 			{
 				"box" : 				{
-					"attack_time" : 275.0,
-					"decay_time" : 672.0,
+					"attack_time" : 356.0,
+					"decay_time" : 334.0,
 					"id" : "obj-13",
 					"maxclass" : "live.adsrui",
 					"numinlets" : 10,
 					"numoutlets" : 10,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 402.862035296581155, 304.641544878519198, 189.000000000000057, 77.307223200725502 ],
-					"release_time" : 571.0,
-					"sustain" : 0.298298298298298
+					"release_time" : 394.0,
+					"sustain" : 0.145145145145145
 				}
 
 			}
@@ -314,7 +314,7 @@
 					"outlettype" : [ "list", "float", "float", "float", "float", "list", "int" ],
 					"parameter_enable" : 0,
 					"patching_rect" : [ 806.72407059316231, 32.62499988079071, 256.0, 128.0 ],
-					"setfilter" : [ 0, 1, 1, 0, 0, 15358.0, 1.226201891899109, 0.335965752601624, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+					"setfilter" : [ 0, 1, 1, 0, 0, 12547.0, 1.226201891899109, 0.580360114574432, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 				}
 
 			}
@@ -431,15 +431,15 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-122",
-					"linecount" : 4,
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1170.543052944871761, 731.0, 110.0, 62.0 ],
+					"patching_rect" : [ 1170.543052944871761, 731.0, 110.0, 35.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 432.25, 21.793975880790754, 370.0, 22.0 ],
-					"text" : "r2b9y3HXbs6K8tvoAAAv joined FILENV. 2 users connected"
+					"text" : "server listening on port 4200"
 				}
 
 			}
@@ -912,7 +912,7 @@
 					"patching_rect" : [ 704.471624373443319, 604.616815447879844, 172.061955064145764, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 432.25, 47.793975880790754, 370.0, 22.0 ],
-					"text" : "fenv fenvR 380.705059"
+					"text" : "voice 2 0 0"
 				}
 
 			}
@@ -6977,6 +6977,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-2", 0 ],
 					"source" : [ "obj-134", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-12", 0 ],
+					"source" : [ "obj-136", 0 ]
 				}
 
 			}

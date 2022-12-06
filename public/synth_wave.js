@@ -1,6 +1,6 @@
 console.log(`nodechestra waveform page loaded`);
 
-const socket = io("/waveform");
+const socket = io("/wave");
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
@@ -11,6 +11,7 @@ const canvasCtx = canvasElement.getContext('2d');
 let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
+let waveSendVal;
 
 // // let waves = [0, 1, 2, 3];
 // // let waves = [0.75, 1.5, 2.25];
@@ -64,9 +65,9 @@ function onResults(results) {
         for (let i = 0; i < handsOn; i++) {
             let indexTip = results.multiHandLandmarks[i][8];
             let indexTipXNorm = indexTip.x * 3.0;
-            let waveSendVal;
             if (results.multiHandedness[i].label === `Right`) {
                 // console.log("right index tip: ", indexTip);
+                canvasCtx.fillStyle = "#f00";
                 canvasCtx.beginPath();
                 canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
                 canvasCtx.fill();
@@ -91,26 +92,31 @@ function onResults(results) {
 
     // all waveform svg icons by Aurélien Dotpro from <a href="https://thenounproject.com/browse/icons/term/sawtooth/" target="_blank" title="sawtooth Icons">Noun Project</a>
     // Trianglewave by Aurélien Dotpro from <a href="https://thenounproject.com/browse/icons/term/trianglewave/" target="_blank" title="Trianglewave Icons">Noun Project</a>
-    drawVis();
+    // drawVis();
 }
 
-// envelope visualizer (adapted from https://codepen.io/ScarpMetal/pen/LyxMGx)
-function drawVis() {
-    // reset variables
-    // let sinStart = width / 5 - width / 10;
-    // canvasCtx.beginPath();
-    // canvasCtx.moveTo(sinStart, height / 2);
-    // canvasCtx.arc(sinStart + width / 20, height / 2, 10, 0, Math.PI);
-    // canvasCtx.moveTo(sinStart + width / 20, height / 2);
-    // canvasCtx.arc(sinStart + width / 20, height / 2, 10, Math.PI, 2 * Math.PI);
+// // envelope visualizer (adapted from https://codepen.io/ScarpMetal/pen/LyxMGx)
+// function drawVis() {
+//     // reset variables
+//     // let sinStart = width / 5 - width / 10;
+//     // canvasCtx.beginPath();
+//     // canvasCtx.moveTo(sinStart, height / 2);
+//     // canvasCtx.arc(sinStart + width / 20, height / 2, 10, 0, Math.PI);
+//     // canvasCtx.moveTo(sinStart + width / 20, height / 2);
+//     // canvasCtx.arc(sinStart + width / 20, height / 2, 10, Math.PI, 2 * Math.PI);
+//     if (waveSendVal <= 0.75) { waveSendVal = 0.0; }
+//     else if (waveSendVal > 0.75 && waveSendVal <= 1.5) { waveSendVal = 1.0; }
+//     else if (waveSendVal > 1.5 && waveSendVal <= 2.25) { waveSendVal = 2.0; }
+//     else if (waveSendVal > 2.25) { waveSendVal = 3.0; }
+//     document.getElementById("waveSn").style.height = (100 - leftShoulderYNorm) + "vh";
+//     document.getElementById("waveTr").style.height = (100 - leftIndexYNorm) + "vh";
+//     document.getElementById("waveSw").style.height = (100 - rightIndexYNorm) + "vh";
+//     document.getElementById("waveSq").style.height = (100 - rightShoulderYNorm) + "vh";
 
-    document.getElementById("waveSn").style.height = (100 - leftShoulderYNorm) + "vh";
-    document.getElementById("waveTr").style.height = (100 - leftIndexYNorm) + "vh";
-    document.getElementById("waveSw").style.height = (100 - rightIndexYNorm) + "vh";
-    document.getElementById("waveSq").style.height = (100 - rightShoulderYNorm) + "vh";
-    // stroke
-    canvasCtx.lineWidth = 5;
-    canvasCtx.strokeStyle = "rgb(21, 255, 0)";
-    canvasCtx.stroke();
-    canvasCtx.closePath();
-}
+
+//     // stroke
+//     canvasCtx.lineWidth = 5;
+//     canvasCtx.strokeStyle = "rgb(21, 255, 0)";
+//     canvasCtx.stroke();
+//     canvasCtx.closePath();
+// }
