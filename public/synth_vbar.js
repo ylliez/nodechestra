@@ -1,6 +1,6 @@
 const socket = io("/vbar");
 socket.on("connect", () => { console.log(`client ID: ${socket.id}`); });
-socket.on("reject", () => { window.location.assign("index.html"); })
+socket.on("reject", () => { window.location.assign("/"); })
 socket.on("accept", () => {
 
     const captureElement = document.getElementById('capture');

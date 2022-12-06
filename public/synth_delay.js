@@ -1,8 +1,12 @@
+// declare socket w/ namespace attribution
 const socket = io("/delay");
+// signify connection attempt
 socket.on("connect", () => { console.log(`client ID: ${socket.id}`); });
+// if namespace already in use, reroute to landing page (fallback of landing page button disabling)
 socket.on("reject", () => { window.location.assign("/"); })
+// otherwise, run synth component
 socket.on("accept", () => {
-
+    // get & set UI elements
     const captureElement = document.getElementById('capture');
     const canvasElement = document.getElementById('canvas');
     const canvasCtx = canvasElement.getContext('2d');

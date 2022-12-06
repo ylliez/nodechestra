@@ -3,7 +3,7 @@ const socket = io("/vmez");
 // signify connection attempt
 socket.on("connect", () => { console.log(`client ID: ${socket.id}`); });
 // if namespace already in use, reroute to landing page (fallback of landing page button disabling)
-socket.on("reject", () => { window.location.assign("index.html"); })
+socket.on("reject", () => { window.location.assign("/"); })
 // otherwise, run synth component
 socket.on("accept", () => {
     // get & set UI elements
