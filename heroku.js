@@ -56,9 +56,9 @@ for (let i = 0; i < io_nsp.length; i++) {
 }
 
 io.on('connection', (socket) => {
-  console.log(io_nsp.length)
+  // console.log(io_nsp.length)
   for (let i = 0; i < io_nsp.length; i++) {
-    console.log(io_nsp[i].conns)
+    // console.log(io_nsp[i].conns)
     if (io_nsp[i].conns >= 1) {
       socket.emit(`connFull`, `${io_nsp_tag[i]}`)
     }
