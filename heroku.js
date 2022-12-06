@@ -56,16 +56,6 @@ for (let i = 0; i < io_nsp.length; i++) {
 }
 
 io.on('connection', (socket) => {
-  // console.log(io_nsp.length)
-  // for (let i = 0; i < io_nsp.length; i++) {
-  //   console.log(io_nsp[i].conns)
-  //   if (io_nsp[i].conns >= 1) {
-  //     socket.emit(`connFull`, `${io_nsp_tag[i]}`)
-  //   }
-  // }
-});
-
-lndg.on('connection', (socket) => {
   console.log(io_nsp.length)
   for (let i = 0; i < io_nsp.length; i++) {
     console.log(io_nsp[i].conns)
@@ -75,34 +65,44 @@ lndg.on('connection', (socket) => {
   }
 });
 
-// max.on('connection', (socket) => {
-//   console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
+// lndg.on('connection', (socket) => {
+//   console.log(io_nsp.length)
+//   for (let i = 0; i < io_nsp.length; i++) {
+//     console.log(io_nsp[i].conns)
+//     if (io_nsp[i].conns >= 1) {
+//       socket.emit(`connFull`, `${io_nsp_tag[i]}`)
+//     }
+//   }
 // });
 
-// for (let i = 0; i < io_nsp.length; i++) {
-//   io_nsp[i].on('connection', (socket) => {
-//     // connection limiter (from https://stackoverflow.com/questions/32190446/socket-io-restrict-number-of-maximum-connections-per-namespace)
-//     if (io_nsp[i].conns >= 1) {
-//       Max.post(`${socket.id} tried to join ${io_nsp_name[i]} but already occupied`);
-//       socket.emit("reject");
-//     } else {
-//       socket.emit("accept");
-//       io_nsp[i].conns++;
-//       Max.post(`${socket.id} joined ${io_nsp_name[i]}. ${io.engine.clientsCount} users connected`);
-//       io.emit(`connFull`, `${io_nsp_tag[i]}`)
-//       socket.onAny((event, args) => {
-//         Max.outlet(args);
-//       });
-//       socket.on("disconnect", () => {
-//         // if disconnected socket is a voice, send a message to Max to turn off the voice
-//         if (i < 6) { Max.outlet(`voice ${i + 1} 0 0`); }
-//         Max.post(`${socket.id} left ${io_nsp_name[i]}. ${io.engine.clientsCount} users connected`);
-//         io.emit(`connOpen`, `${io_nsp_tag[i]}`)
-//         io_nsp[i].conns--;
-//       });
-//     }
-//   });
-// }
+max.on('connection', (socket) => {
+  console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
+});
+
+for (let i = 0; i < io_nsp.length; i++) {
+  io_nsp[i].on('connection', (socket) => {
+    // connection limiter (from https://stackoverflow.com/questions/32190446/socket-io-restrict-number-of-maximum-connections-per-namespace)
+    if (io_nsp[i].conns >= 1) {
+      console.log(`${socket.id} tried to join ${io_nsp_name[i]} but already occupied`);
+      socket.emit("reject");
+    } else {
+      socket.emit("accept");
+      io_nsp[i].conns++;
+      console.log(`${socket.id} joined ${io_nsp_name[i]}. ${io.engine.clientsCount} users connected`);
+      io.emit(`connFull`, `${io_nsp_tag[i]}`)
+      socket.onAny((event, args) => {
+        max.emit(args);
+      });
+      socket.on("disconnect", () => {
+        // if disconnected socket is a voice, send a message to Max to turn off the voice
+        if (i < 6) { max.emit(`voice ${i + 1} 0 0`); }
+        console.log(`${socket.id} left ${io_nsp_name[i]}. ${io.engine.clientsCount} users connected`);
+        io.emit(`connOpen`, `${io_nsp_tag[i]}`)
+        io_nsp[i].conns--;
+      });
+    }
+  });
+}
 
 // io.on('connection', (socket) => {
 //   console.log(`${socket.id} joined. ${io.engine.clientsCount} users connected`);
@@ -114,116 +114,116 @@ lndg.on('connection', (socket) => {
 //   });
 // });
 
-max.on('connection', (socket) => {
-  console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
-});
+// max.on('connection', (socket) => {
+//   console.log(`${socket.id} joined MAX. ${io.engine.clientsCount} users connected`);
+// });
 
-vbas.on('connection', (socket) => {
-  console.log(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-  socket.on("disconnect", () => {
-    max.emit(`voice 1 0 0`);
-    console.log(`${socket.id} left BASS. ${io.engine.clientsCount} users connected`);
-  });
-});
-
-vbar.on('connection', (socket) => {
-  if (vbar.conns >= 1) {
-    Max.post(`${socket.id} tried to join BARITONE but already occupied`);
-    socket.emit("reject");
-  } else {
-    socket.emit("accept");
-    vbar.conns++;
-    Max.post(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
-    io.emit(`connFull`, `vbar`)
-    socket.onAny((event, args) => {
-      Max.outlet(args);
-    });
-    socket.on("disconnect", () => {
-      Max.outlet(`voice 2 0 0`);
-      Max.post(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
-      io.emit(`connOpen`, `vbar`)
-      vbar.conns--;
-    });
-  }
-});
-
-// vbar.on('connection', (socket) => {
-//   console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+// vbas.on('connection', (socket) => {
+//   console.log(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
 //   socket.onAny((event, args) => { max.emit(args); });
 //   socket.on("disconnect", () => {
-//     max.emit(`voice 2 0 0`);
-//     console.log(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
+//     max.emit(`voice 1 0 0`);
+//     console.log(`${socket.id} left BASS. ${io.engine.clientsCount} users connected`);
 //   });
 // });
 
-vten.on('connection', (socket) => {
-  console.log(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-  socket.on("disconnect", () => {
-    max.emit(`voice 3 0 0`);
-    console.log(`${socket.id} left TENOR. ${io.engine.clientsCount} users connected`);
-  });
-});
+// vbar.on('connection', (socket) => {
+//   if (vbar.conns >= 1) {
+//     console.log(`${socket.id} tried to join BARITONE but already occupied`);
+//     socket.emit("reject");
+//   } else {
+//     socket.emit("accept");
+//     vbar.conns++;
+//     console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+//     io.emit(`connFull`, `vbar`)
+//     socket.onAny((event, args) => {
+//       max.emit(args);
+//     });
+//     socket.on("disconnect", () => {
+//       max.emit(`voice 2 0 0`);
+//       console.log(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
+//       io.emit(`connOpen`, `vbar`)
+//       vbar.conns--;
+//     });
+//   }
+// });
 
-vcon.on('connection', (socket) => {
-  console.log(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-  socket.on("disconnect", () => {
-    max.emit(`voice 4 0 0`);
-    console.log(`${socket.id} left CONTRALTO. ${io.engine.clientsCount} users connected`);
-  });
-});
+// // vbar.on('connection', (socket) => {
+// //   console.log(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
+// //   socket.onAny((event, args) => { max.emit(args); });
+// //   socket.on("disconnect", () => {
+// //     max.emit(`voice 2 0 0`);
+// //     console.log(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
+// //   });
+// // });
 
-vmez.on('connection', (socket) => {
-  console.log(`${socket.id} joined MEZ-SOP. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-  socket.on("disconnect", () => {
-    max.emit(`voice 5 0 0`);
-    console.log(`${socket.id} left MEZ-SOP. ${io.engine.clientsCount} users connected`);
-  });
-});
+// vten.on('connection', (socket) => {
+//   console.log(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+//   socket.on("disconnect", () => {
+//     max.emit(`voice 3 0 0`);
+//     console.log(`${socket.id} left TENOR. ${io.engine.clientsCount} users connected`);
+//   });
+// });
 
-vsop.on('connection', (socket) => {
-  console.log(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-  socket.on("disconnect", () => {
-    max.emit(`voice 6 0 0`);
-    console.log(`${socket.id} left SOPRANO. ${io.engine.clientsCount} users connected`);
-  });
-});
+// vcon.on('connection', (socket) => {
+//   console.log(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+//   socket.on("disconnect", () => {
+//     max.emit(`voice 4 0 0`);
+//     console.log(`${socket.id} left CONTRALTO. ${io.engine.clientsCount} users connected`);
+//   });
+// });
 
-wave.on('connection', (socket) => {
-  console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-});
+// vmez.on('connection', (socket) => {
+//   console.log(`${socket.id} joined MEZ-SOP. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+//   socket.on("disconnect", () => {
+//     max.emit(`voice 5 0 0`);
+//     console.log(`${socket.id} left MEZ-SOP. ${io.engine.clientsCount} users connected`);
+//   });
+// });
 
-aenv.on('connection', (socket) => {
-  console.log(`${socket.id} joined AMPLITUDE ENVELOPE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-});
+// vsop.on('connection', (socket) => {
+//   console.log(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+//   socket.on("disconnect", () => {
+//     max.emit(`voice 6 0 0`);
+//     console.log(`${socket.id} left SOPRANO. ${io.engine.clientsCount} users connected`);
+//   });
+// });
 
-delay.on('connection', (socket) => {
-  console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-});
+// wave.on('connection', (socket) => {
+//   console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });
 
-reverb.on('connection', (socket) => {
-  console.log(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-});
+// aenv.on('connection', (socket) => {
+//   console.log(`${socket.id} joined AMPLITUDE ENVELOPE. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });
 
-noise.on('connection', (socket) => {
-  console.log(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-});
+// delay.on('connection', (socket) => {
+//   console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });
 
-filter.on('connection', (socket) => {
-  Max.post(`${socket.id} joined FILTER. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(args); });
-});
+// reverb.on('connection', (socket) => {
+//   console.log(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });
 
-fenv.on('connection', (socket) => {
-  console.log(`${socket.id} joined FILTER ENVELOPE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { max.emit(args); });
-});
+// noise.on('connection', (socket) => {
+//   console.log(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });
+
+// filter.on('connection', (socket) => {
+//   console.log(`${socket.id} joined FILTER. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });
+
+// fenv.on('connection', (socket) => {
+//   console.log(`${socket.id} joined FILTER ENVELOPE. ${io.engine.clientsCount} users connected`);
+//   socket.onAny((event, args) => { max.emit(args); });
+// });

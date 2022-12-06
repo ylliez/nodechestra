@@ -1,7 +1,7 @@
 console.log(`nodechestra landing page loaded`);
 
 
-const socket = io("/lndg");
+const socket = io("/");
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
