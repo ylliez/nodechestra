@@ -68,27 +68,27 @@ socket.on("accept", () => {
         }
 
     }
-
-    function sendValIO(value) {
-        // let maxValIO = value ? 1 : 0;
-        // socket.emit("arp", `arp arpIO ${maxValIO}`);
-        if (value) {
-            socket.emit("arp", `arp arpIO 1`);
-            document.querySelectorAll(".radiogroup").forEach(group => {
-                group.style.display = "block"
-            });
-        } else {
-            socket.emit("arp", `arp arpIO 0`);
-            document.querySelectorAll(".radiogroup").forEach(group => {
-                group.style.display = "none"
-            });
-        }
-
-    }
-    function sendValDir(value) {
-        socket.emit("arp", `arp arpDir ${value}`);
-    }
-    function sendValOct(value) {
-        socket.emit("arp", `arp arpOct ${value}`);
-    }
 });
+
+function sendValIO(value) {
+    // let maxValIO = value ? 1 : 0;
+    // socket.emit("arp", `arp arpIO ${maxValIO}`);
+    if (value) {
+        socket.emit("arp", `arp arpIO 1`);
+        document.querySelectorAll(".radiogroup").forEach(group => {
+            group.style.display = "block"
+        });
+    } else {
+        socket.emit("arp", `arp arpIO 0`);
+        document.querySelectorAll(".radiogroup").forEach(group => {
+            group.style.display = "none"
+        });
+    }
+
+}
+function sendValDir(value) {
+    socket.emit("arp", `arp arpDir ${value}`);
+}
+function sendValOct(value) {
+    socket.emit("arp", `arp arpOct ${value}`);
+}
