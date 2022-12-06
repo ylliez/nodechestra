@@ -67,7 +67,6 @@ function onResults(results) {
 }
 
 function sendValIO(value) {
-    // // console.log(value)
     // let maxValIO = value ? 1 : 0;
     // socket.emit("arp", `arp arpIO ${maxValIO}`);
     if (value) {
