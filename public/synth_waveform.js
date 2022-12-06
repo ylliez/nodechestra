@@ -67,7 +67,6 @@ function onResults(results) {
             let waveSendVal;
             if (results.multiHandedness[i].label === `Right`) {
                 // console.log("right index tip: ", indexTip);
-                canvasCtx.fillStyle = "#FF0000";
                 canvasCtx.beginPath();
                 canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
                 canvasCtx.fill();
@@ -75,7 +74,7 @@ function onResults(results) {
             }
             if (results.multiHandedness[i].label === `Left`) {
                 // console.log("left index tip: ", indexTip);
-                canvasCtx.fillStyle = "#00FF00";
+                canvasCtx.fillStyle = "#00f";
                 canvasCtx.beginPath();
                 canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
                 canvasCtx.fill();
