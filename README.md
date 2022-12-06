@@ -16,12 +16,26 @@
 
 ## Parameters
 
-| parameter | function | detail | tool | implemented |
-| - | - | - | - | - |
-| Waveform  |  waveform panning |      Rx continuous / Lx discrete       |  hands   |  OK
-| Delay     | delay parameters          |      Ry amt / Lx time                  |  hands   |  OK
-| Noise     | noise parameters          |      Ry amt / Lx colour                |  hands   |  OK
-| Reverb    | reverb parameters         | Lsh amt / Lin dec / Rin dam / Rsh diff |  pose    |  OK
+| parameter   | function                  | detail  | tool                                   | implemented |
+| -           | -                         | -       | -                                      | - |
+| bass        | bass choral voice         |  mouth  | Y: frequency  / open: trigger          |  OK
+| baritone    | baritone choral voice     |  mouth  | Y: frequency  / open: trigger          |  OK
+| tenor       | tenor choral voice        |  mouth  | Y: frequency  / open: trigger          |  OK
+| contralto   | contralto choral voice    |  mouth  | Y: frequency  / open: trigger          |  OK
+| mezzo-sop   | mezzo-sop choral voice    |  mouth  | Y: frequency  / open: trigger          |  OK
+| soprano     | soprano choral voice      |  mouth  | Y: frequency  / open: trigger          |  OK
+|             |                           |         |                                        |   
+| waveform    | waveform panning          |  hands  | RX: continuous / LX: discrete          |  OK
+| envelope    | envelope parameters       |  hands  | LY: A / LY: D / RY: S / RX: R          |  OK
+|             |                           |         |                                        |   
+| noise       | noise parameters          |  hands  | RY: amt / LX: colour                   |  OK
+| delay       | delay parameters          |  hands  | RY: amt / LX: time                     |  OK
+| reverb      | reverb parameters         |  pose   | Lsh amt / Lin dec / Rin dam / Rsh diff |  OK
+|             |                           |         |                                        |   
+| filter      | filter parameters         |  hands  | RY: amt / LX: freq / LY: resonance     |  OK
+| envelope    | envelope parameters       |  hands  | LY: A / LY: D / RY: S / RX: R          |  OK
+|             |                           |         |                                        |   
+| arpeggiator | arpeggiator parameters    |  hands  | RY: duty / LX: rate                    |  OK
 
 
 ## Resources
