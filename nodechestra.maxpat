@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 1474.0, -14.0, 1375.0, 960.0 ],
+		"rect" : [ 34.0, 79.0, 1135.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-20",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 441.0, 497.0, 50.0, 22.0 ],
+					"text" : "arpIO 1"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"bgcolor" : [ 0.301961, 0.301961, 0.301961, 1.0 ],
 					"bgcolor2" : [ 0.301961, 0.301961, 0.301961, 1.0 ],
@@ -208,16 +220,16 @@
 			}
 , 			{
 				"box" : 				{
-					"attack_time" : 356.0,
-					"decay_time" : 334.0,
+					"attack_time" : 10.0,
+					"decay_time" : 100.0,
 					"id" : "obj-13",
 					"maxclass" : "live.adsrui",
 					"numinlets" : 10,
 					"numoutlets" : 10,
 					"outlettype" : [ "", "", "", "", "", "", "", "", "", "" ],
 					"patching_rect" : [ 402.862035296581155, 304.641544878519198, 189.000000000000057, 77.307223200725502 ],
-					"release_time" : 394.0,
-					"sustain" : 0.145145145145145
+					"release_time" : 500.0,
+					"sustain" : 0.7997997997998
 				}
 
 			}
@@ -282,6 +294,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -431,15 +445,15 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-122",
-					"linecount" : 2,
+					"linecount" : 4,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1170.543052944871761, 731.0, 110.0, 35.0 ],
+					"patching_rect" : [ 1170.543052944871761, 731.0, 110.0, 62.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 432.25, 21.793975880790754, 370.0, 22.0 ],
-					"text" : "server listening on port 4200"
+					"text" : "dfrRQ4y6K4Du7DmlAAAN joined BARITONE. 2 users connected"
 				}
 
 			}
@@ -912,7 +926,7 @@
 					"patching_rect" : [ 704.471624373443319, 604.616815447879844, 172.061955064145764, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 432.25, 47.793975880790754, 370.0, 22.0 ],
-					"text" : "voice 2 0 0"
+					"text" : "voice 2 50 0"
 				}
 
 			}
@@ -3146,8 +3160,7 @@
 					"patching_rect" : [ 149.555582152472482, 304.641544878519198, 59.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 236.111119409402136, 184.293975880790754, 59.0, 20.0 ],
-					"text" : "DELAY",
-					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"text" : "DELAY"
 				}
 
 			}
@@ -3881,6 +3894,8 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
+						"node_bin_path" : "",
+						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -4096,8 +4111,7 @@
 					"patching_rect" : [ 180.518527384157466, 463.331394990285503, 59.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 236.111119409402136, 279.477463722301195, 59.0, 20.0 ],
-					"text" : "REVERB",
-					"textcolor" : [ 0.0, 0.0, 0.0, 1.0 ]
+					"text" : "REVERB"
 				}
 
 			}
@@ -7283,7 +7297,16 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-20", 1 ],
+					"order" : 1,
+					"source" : [ "obj-34", 3 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-28", 0 ],
+					"order" : 0,
 					"source" : [ "obj-34", 3 ]
 				}
 

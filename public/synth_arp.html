@@ -4,20 +4,175 @@
 <head>
     <title>Synth - Arpeggiator</title>
     <link rel='stylesheet' type="text/css" href='index.css' />
-
     <style>
         #uiDiv {
-            display: flex;
-            flex-direction: row;
-            background-color: rgb(21, 255, 0);
-            top: 50vh
+            z-index: 4;
         }
 
-        .bar {
-            width: 25vw;
-            height: 50vh;
-            text-align: center;
+        /* custom GUI elements from (https://www.w3schools.com/howto/howto_css_custom_checkbox.asp) */
+        /* IO slider */
+        .switch {
+            position: absolute;
+            display: block;
+            left: 20vw;
+            top: 50vh;
+            width: 10vw;
+            height: 5vh;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 10vh;
+            background-color: lightgreen;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 4vh;
+            width: 4vh;
+            left: 0.5vh;
+            bottom: 0.5vh;
+            border-radius: 10vh;
             background-color: black;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #15ff00;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(6.5vw);
+        }
+
+        /* Radio group */
+        .radiogroup {
+            position: absolute;
+            display: none;
+            top: 50vh;
+        }
+
+        #radiogroup1 {
+            left: 40vw;
+        }
+
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            user-select: none;
+        }
+
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: lightgreen;
+            border-radius: 50%;
+        }
+
+        .container input:checked~.checkmark {
+            background-color: #15ff00;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .container input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .container .checkmark:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: black;
+        }
+
+        #radiogroup2 {
+            left: 60vw;
+        }
+
+        .container2 {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            user-select: none;
+        }
+
+        .container2 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 25px;
+            width: 25px;
+            background-color: lightgreen;
+            border-radius: 50%;
+        }
+
+        .container2 input:checked~.checkmark2 {
+            background-color: #15ff00;
+        }
+
+        .checkmark2:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .container2 input:checked~.checkmark2:after {
+            display: block;
+        }
+
+        .container2 .checkmark2:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: black;
         }
     </style>
 
@@ -33,16 +188,51 @@
         <canvas id="canvas" width="1280px" height="720px"></canvas>
     </div>
     <div id="uiDiv">
-        <div class="bar" id="waveSn">SINE</div>
-        <div class="bar" id="waveTr">TRIANGLE</div>
-        <div class="bar" id="waveSw">SAWTOOTH</div>
-        <div class="bar" id="waveSq">SQUARE</div>
+        <label class="switch">
+            <input type="checkbox" id="arpIO" onchange="sendValIO(this.checked)">
+            <span class="slider"></span>
+        </label>
+        <div class="radiogroup" id="radiogroup1">
+            <label class="container">as is
+                <input type="radio" checked="checked" name="radio" onclick="sendValDir(0)">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">up
+                <input type="radio" name="radio" onclick="sendValDir(1)">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">down
+                <input type="radio" name="radio" onclick="sendValDir(2)">
+                <span class="checkmark"></span>
+            </label>
+            <label class="container">pal
+                <input type="radio" name="radio" onclick="sendValDir(3)">
+                <span class="checkmark"></span>
+            </label>
+            </label>
+            <label class="container">rand
+                <input type="radio" name="radio" onclick="sendValDir(4)">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+        <div class="radiogroup" id="radiogroup2">
+            <label class="container2">one
+                <input type="radio" checked="checked" name="radio" onclick="sendValOct(0)">
+                <span class="checkmark2"></span>
+            </label>
+            <label class="container2">two
+                <input type="radio" name="radio" onclick="sendValOct(1)">
+                <span class="checkmark2"></span>
+            </label>
+            <label class="container2">three
+                <input type="radio" name="radio" onclick="sendValOct(2)">
+                <span class="checkmark2"></span>
+            </label>
+        </div>
     </div>
     <div id="titleDiv">ARPEGGIATOR</div>
-    <!-- <div id="instructionDiv">right hand: continuous pan | left hand: discrete pan</div> -->
-
     <script src="/socket.io/socket.io.js"></script>
-    <script src="synth_waveform.js"></script>
+    <script src="synth_arp.js"></script>
 </body>
 
 </html>
