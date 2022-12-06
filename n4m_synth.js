@@ -135,31 +135,55 @@ io.on('connection', (socket) => {
 vbas.on('connection', (socket) => {
   Max.post(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { Max.outlet(args); });
+  socket.on("disconnect", () => {
+    Max.outlet(`voice 1 0 0`);
+    Max.post(`${socket.id} left BASS. ${io.engine.clientsCount} users connected`);
+  });
 });
 
 vbar.on('connection', (socket) => {
   Max.post(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { Max.outlet(args); });
+  socket.on("disconnect", () => {
+    Max.outlet(`voice 2 0 0`);
+    Max.post(`${socket.id} left BARITONE. ${io.engine.clientsCount} users connected`);
+  });
 });
 
 vten.on('connection', (socket) => {
   Max.post(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { Max.outlet(args); });
+  socket.on("disconnect", () => {
+    Max.outlet(`voice 3 0 0`);
+    Max.post(`${socket.id} left TENOR. ${io.engine.clientsCount} users connected`);
+  });
 });
 
 vcon.on('connection', (socket) => {
   Max.post(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { Max.outlet(args); });
+  socket.on("disconnect", () => {
+    Max.outlet(`voice 4 0 0`);
+    Max.post(`${socket.id} left CONTRALTO. ${io.engine.clientsCount} users connected`);
+  });
 });
 
 vmez.on('connection', (socket) => {
-  Max.post(`${socket.id} joined MEZZO-SOP. ${io.engine.clientsCount} users connected`);
+  Max.post(`${socket.id} joined MEZ-SOP. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { Max.outlet(args); });
+  socket.on("disconnect", () => {
+    Max.outlet(`voice 5 0 0`);
+    Max.post(`${socket.id} left MEZ-SOP. ${io.engine.clientsCount} users connected`);
+  });
 });
 
 vsop.on('connection', (socket) => {
   Max.post(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { Max.outlet(args); });
+  socket.on("disconnect", () => {
+    Max.outlet(`voice 6 0 0`);
+    Max.post(`${socket.id} left SOPRANO. ${io.engine.clientsCount} users connected`);
+  });
 });
 
 waveform.on('connection', (socket) => {
