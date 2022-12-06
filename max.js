@@ -15,7 +15,7 @@ socket.on("connect", () => {
   Max.post(`client ID: ${socket.id}`);
 });
 
-socket.onAny((event, args) => {
+socket.onAny((args) => {
   // Max.post(event, args);
   // Max.post(event);
   Max.post(args);
