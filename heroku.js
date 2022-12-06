@@ -30,6 +30,8 @@ app.get("/fenv", (req, res) => { res.sendFile(__dirname + '/public/synth_fenv.ht
 app.get("/arp", (req, res) => { res.sendFile(__dirname + '/public/synth_arp.html'); });
 
 const max = io.of('/max');
+const lndg = io.of('/lndg');
+
 const vbas = io.of('/vbas');
 const vbar = io.of('/vbar');
 const vten = io.of('/vten');
@@ -54,6 +56,16 @@ for (let i = 0; i < io_nsp.length; i++) {
 }
 
 io.on('connection', (socket) => {
+  // console.log(io_nsp.length)
+  // for (let i = 0; i < io_nsp.length; i++) {
+  //   console.log(io_nsp[i].conns)
+  //   if (io_nsp[i].conns >= 1) {
+  //     socket.emit(`connFull`, `${io_nsp_tag[i]}`)
+  //   }
+  // }
+});
+
+lndg.on('connection', (socket) => {
   console.log(io_nsp.length)
   for (let i = 0; i < io_nsp.length; i++) {
     console.log(io_nsp[i].conns)
