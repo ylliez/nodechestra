@@ -1,7 +1,5 @@
-console.log(`nodechestra voice mezzo-soprano page loaded`);
-
 const socket = io("/vbar");
-socket.on("connect", () => { console.log(`nodechestra voice mezzo-soprano page connected`); });
+socket.on("connect", () => { });
 socket.on("reject", () => { window.location.assign("index.html"); })
 socket.on("accept", () => {
 
