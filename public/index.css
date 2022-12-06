@@ -15,6 +15,7 @@ body {
     width: 100%;
     /* left: 50vw; */
     text-align: center;
+    display: none;
 }
 
 #instructionDiv {

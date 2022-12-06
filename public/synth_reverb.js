@@ -70,19 +70,19 @@ socket.on("accept", () => {
 
             canvasCtx.fillStyle = "white";
             canvasCtx.beginPath();
-            canvasCtx.arc(leftShoulder.x * width, leftShoulder.y * height, 20, 0, 2 * Math.PI);
+            canvasCtx.arc(leftShoulder.x * width, leftShoulder.y * height, 10, 0, 2 * Math.PI);
             canvasCtx.fill();
             canvasCtx.fillStyle = "blue";
             canvasCtx.beginPath();
-            canvasCtx.arc(leftIndex.x * width, leftIndex.y * height, 20, 0, 2 * Math.PI);
+            canvasCtx.arc(leftIndex.x * width, leftIndex.y * height, 10, 0, 2 * Math.PI);
             canvasCtx.fill();
             canvasCtx.fillStyle = "red";
             canvasCtx.beginPath();
-            canvasCtx.arc(rightIndex.x * width, rightIndex.y * height, 20, 0, 2 * Math.PI);
+            canvasCtx.arc(rightIndex.x * width, rightIndex.y * height, 10, 0, 2 * Math.PI);
             canvasCtx.fill();
             canvasCtx.fillStyle = "yellow";
             canvasCtx.beginPath();
-            canvasCtx.arc(rightShoulder.x * width, rightShoulder.y * height, 20, 0, 2 * Math.PI);
+            canvasCtx.arc(rightShoulder.x * width, rightShoulder.y * height, 10, 0, 2 * Math.PI);
             canvasCtx.fill();
             canvasCtx.restore();
 
