@@ -27,6 +27,9 @@ app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_wav
 app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
 app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
+app.get("/aenv", (req, res) => { res.sendFile(__dirname + '/public/synth_aenv.html'); });
+app.get("/filter", (req, res) => { res.sendFile(__dirname + '/public/synth_filter.html'); });
+app.get("/fenv", (req, res) => { res.sendFile(__dirname + '/public/synth_fenv.html'); });
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 function attributionRoute(req, res, next) {
@@ -46,6 +49,9 @@ const waveform = io.of("/waveform");
 const noise = io.of("/noise");
 const delay = io.of("/delay");
 const reverb = io.of("/reverb");
+const aenv = io.of("/aenv");
+const filter = io.of("/filter");
+const fenv = io.of("/fenv");
 
 // // IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
 // io.of("/").adapter.on("create-room", (room) => {
@@ -168,6 +174,16 @@ vsop.on('connection', (socket) => {
   socket.onAny((event, args) => { max.emit(event, args); });
 });
 
+waveform.on('connection', (socket) => {
+  console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { max.emit(event, args); });
+});
+
+aenv.on('connection', (socket) => {
+  console.log(`${socket.id} joined AMPLITUDE ENVELOPE. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { max.emit(event, args); });
+});
+
 delay.on('connection', (socket) => {
   console.log(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { max.emit(event, args); });
@@ -183,7 +199,12 @@ noise.on('connection', (socket) => {
   socket.onAny((event, args) => { max.emit(event, args); });
 });
 
-waveform.on('connection', (socket) => {
-  console.log(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
+filter.on('connection', (socket) => {
+  Max.post(`${socket.id} joined FILTER. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+fenv.on('connection', (socket) => {
+  console.log(`${socket.id} joined FILTER ENVELOPE. ${io.engine.clientsCount} users connected`);
   socket.onAny((event, args) => { max.emit(event, args); });
 });

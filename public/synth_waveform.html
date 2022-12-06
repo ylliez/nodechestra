@@ -5,6 +5,21 @@
     <title>Synth - Waveform</title>
     <link rel='stylesheet' type="text/css" href='index.css' />
 
+    <style>
+        #uiDiv {
+            display: flex;
+            flex-direction: row;
+            background-color: rgb(21, 255, 0);
+        }
+
+        .bar {
+            width: 25vw;
+            height: 100vh;
+            text-align: center;
+            background-color: black;
+        }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
@@ -17,10 +32,15 @@
         <canvas id="canvas" width="1280px" height="720px"></canvas>
     </div>
     <div id="uiDiv">
-        <!-- <div class="waveDiv" id="waveSn" style="width: ;"></div>
-        <div class="waveDiv" id="waveSn"></div>
-        <div class="waveDiv" id="waveSn"></div>
-        <div class="waveDiv" id="waveSn"></div> -->
+        <!-- <img src="assets/wave_sin.svg" class="wave" id="sin"></img>
+        <img src="assets/wave_tri.svg" class="wave" id="tri"></img>
+        <img src="assets/wave_saw.svg" class="wave" id="saw"></img>
+        <img src="assets/wave_sqr.svg" class="wave" id="sqr"></img> -->
+        <!-- <svg src="assets/wave_sqr.svg" class="wave" id="sqr"></svg> -->
+        <div class="bar" id="waveSn"></div>
+        <div class="bar" id="waveTr"></div>
+        <div class="bar" id="waveSw"></div>
+        <div class="bar" id="waveSq"></div>
     </div>
     <div id="titleDiv">WAVEFORM</div>
 

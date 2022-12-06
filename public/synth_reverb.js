@@ -52,38 +52,41 @@ function onResults(results) {
         // let rightShoulder = results.poseLandmarks[12];
         // let rightIndex = results.poseLandmarks[20];
         // SWAP DUE TO MIRROR
-        let leftIndex = results.poseLandmarks[20];
         let leftShoulder = results.poseLandmarks[12];
-        let rightShoulder = results.poseLandmarks[11];
+        let leftIndex = results.poseLandmarks[20];
         let rightIndex = results.poseLandmarks[19];
-        let leftIndexY = (1 - leftIndex.y);
+        let rightShoulder = results.poseLandmarks[11];
         let leftShoulderY = (1 - leftShoulder.y);
-        let rightShoulderY = (1 - rightShoulder.y);
+        let leftIndexY = (1 - leftIndex.y);
         let rightIndexY = (1 - rightIndex.y);
-        let leftIndexYNorm = leftIndexY * 100;
+        let rightShoulderY = (1 - rightShoulder.y);
         let leftShoulderYNorm = leftShoulderY * 100;
-        let rightShoulderYNorm = rightShoulderY * 100;
+        let leftIndexYNorm = leftIndexY * 100;
         let rightIndexYNorm = rightIndexY * 100;
+        let rightShoulderYNorm = rightShoulderY * 100;
 
-        canvasCtx.fillStyle = "#FF0000";
+        canvasCtx.fillStyle = "white";
         canvasCtx.beginPath();
         canvasCtx.arc(leftShoulder.x * width, leftShoulder.y * height, 20, 0, 2 * Math.PI);
         canvasCtx.fill();
-        canvasCtx.fillStyle = "#00FF00";
+        canvasCtx.fillStyle = "blue";
+        canvasCtx.beginPath();
+        canvasCtx.arc(leftIndex.x * width, leftIndex.y * height, 20, 0, 2 * Math.PI);
+        canvasCtx.fill();
+        canvasCtx.fillStyle = "red";
+        canvasCtx.beginPath();
+        canvasCtx.arc(rightIndex.x * width, rightIndex.y * height, 20, 0, 2 * Math.PI);
+        canvasCtx.fill();
+        canvasCtx.fillStyle = "yellow";
         canvasCtx.beginPath();
         canvasCtx.arc(rightShoulder.x * width, rightShoulder.y * height, 20, 0, 2 * Math.PI);
         canvasCtx.fill();
         canvasCtx.restore();
-        canvasCtx.fillStyle = "#0000FF";
-        canvasCtx.beginPath();
-        canvasCtx.arc(leftIndex.x * width, leftIndex.y * height, 20, 0, 2 * Math.PI);
-        canvasCtx.fill();
-        canvasCtx.fillStyle = "#FFFFFF";
-        canvasCtx.beginPath();
-        canvasCtx.arc(rightIndex.x * width, rightIndex.y * height, 20, 0, 2 * Math.PI);
-        canvasCtx.fill();
-        canvasCtx.restore();
 
         socket.emit("reverb", `rev ${leftShoulderYNorm} ${leftIndexYNorm} ${rightIndexYNorm} ${rightShoulderYNorm}`);
+        document.getElementById("amt").style.height = (100 - leftShoulderYNorm) + "vh";
+        document.getElementById("dec").style.height = (100 - leftIndexYNorm) + "vh";
+        document.getElementById("damp").style.height = (100 - rightIndexYNorm) + "vh";
+        document.getElementById("diff").style.height = (100 - rightShoulderYNorm) + "vh";
     }
 }

@@ -1,6 +1,6 @@
-console.log(`nodechestra delay page loaded`);
+console.log(`nodechestra filter page loaded`);
 
-const socket = io("/delay");
+const socket = io("/filter");
 socket.on("connect", () => {
     console.log(`client ID: ${socket.id}`);
 });
@@ -12,12 +12,15 @@ let width = innerWidth, height = innerHeight;
 canvasElement.width = width;
 canvasElement.height = height;
 
-let del = {
+let fil = {
     amt: 0,
-    lvl: 0.5,
-    dur: 0.25,
+    frq: 0.5,
+    res: 0.25,
     width: 0,
-    size: height
+    size: height,
+    maxAmt: 0,
+    maxFrq: 0,
+    maxRes: 0
 };
 
 const hands = new Hands({
@@ -53,31 +56,26 @@ function onResults(results) {
         for (let i = 0; i < handsOn; i++) {
             let indexTip = results.multiHandLandmarks[i][8];
             if (results.multiHandedness[i].label === `Right`) {
-                let rightX = indexTip.x;
-                let rightY = (1 - indexTip.y);
                 canvasCtx.fillStyle = "red";
                 canvasCtx.beginPath();
                 canvasCtx.arc(indexTip.x * width, indexTip.y * height, 10, 0, 2 * Math.PI);
                 canvasCtx.fill();
-                del.amt = rightY;
-                socket.emit("delay", `del delAmt ${del.amt}`);
-
+                fil.amt = 1 - indexTip.y;
+                // socket.emit("filter", `fil filAmt ${1 - indexTip.y}`);
             }
             if (results.multiHandedness[i].label === `Left`) {
-                let leftX = indexTip.x;
-                let leftY = (1 - indexTip.y);
                 canvasCtx.fillStyle = "blue";
                 canvasCtx.beginPath();
                 canvasCtx.arc(indexTip.x * width, indexTip.y * height, 10, 0, 2 * Math.PI);
                 canvasCtx.fill();
-                del.lvl = leftY
-                del.dur = leftX
-                socket.emit("delay", `del delLvl ${del.lvl}`);
-                socket.emit("delay", `del delTime ${indexTip.x * 1000}`);
+                fil.frq = indexTip.x;
+                fil.res = (1 - indexTip.y);
+                // socket.emit("filter", `fil filFreq ${indexTip.x * 20000}`);
+                // socket.emit("filter", `fil filRes ${1 - indexTip.y}`);
             }
         }
         canvasCtx.restore();
-        // socket.emit("delay", `del delTime ${indexTip.x * 2000}`);
+        socket.emit("filter", `fil ${fil.amt} ${fil.frq * 20000} ${fil.res}`);
     }
     drawVis();
 }
@@ -85,20 +83,16 @@ function onResults(results) {
 // envelope visualizer (adapted from https://codepen.io/ScarpMetal/pen/LyxMGx)
 function drawVis() {
     // reset variables
-    del.width = del.dur * width / 5;
-    del.size = height;
+    // total = env.attack + env.decay + env.release + env.susW;
+    current = 0;
     canvasCtx.beginPath();
-    for (let i = 5; i < width; i += del.width) {
-        // console.log(i)
-        canvasCtx.moveTo(i, height);
-        // console.log(del.size)
-        canvasCtx.lineTo(i, (height - del.size));
-        del.size = del.size * del.lvl
-    }
+    canvasCtx.moveTo(0, height - (fil.amt * height));
+    canvasCtx.lineTo(fil.frq * width - (fil.res * width / 2), height - (fil.amt * height));
+    canvasCtx.lineTo(fil.frq * width + (fil.res * width / 2), height);
+
     // stroke
-    canvasCtx.lineWidth = 10;
-    // canvasCtx.strokeStyle = "white";
-    canvasCtx.strokeStyle = `rgba(21,255,0,${del.amt})`
+    canvasCtx.lineWidth = 6;
+    canvasCtx.strokeStyle = "rgb(21, 255, 0)";
     canvasCtx.stroke();
     canvasCtx.closePath();
 }

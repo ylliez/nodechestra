@@ -28,6 +28,9 @@ app.get("/waveform", (req, res) => { res.sendFile(__dirname + '/public/synth_wav
 app.get("/noise", (req, res) => { res.sendFile(__dirname + '/public/synth_noise.html'); });
 app.get("/delay", (req, res) => { res.sendFile(__dirname + '/public/synth_delay.html'); });
 app.get("/reverb", (req, res) => { res.sendFile(__dirname + '/public/synth_reverb.html'); });
+app.get("/aenv", (req, res) => { res.sendFile(__dirname + '/public/synth_aenv.html'); });
+app.get("/filter", (req, res) => { res.sendFile(__dirname + '/public/synth_filter.html'); });
+app.get("/fenv", (req, res) => { res.sendFile(__dirname + '/public/synth_fenv.html'); });
 
 // function defaultRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
 // function clientRoute(req, res, next) { res.sendFile(__dirname + '/public/client.html'); }
@@ -46,9 +49,12 @@ const vcon = io.of('/vcon');
 const vmez = io.of('/vmez');
 const vsop = io.of('/vsop');
 const waveform = io.of("/waveform");
+const aenv = io.of("/aenv");
 const noise = io.of("/noise");
 const delay = io.of("/delay");
 const reverb = io.of("/reverb");
+const filter = io.of("/filter");
+const fenv = io.of("/fenv");
 
 // IO & HMTL separation: https://stackoverflow.com/questions/64767505/socket-io-show-the-users-in-the-correct-div 
 io.of("/").adapter.on("create-room", (room) => {
@@ -128,50 +134,65 @@ io.on('connection', (socket) => {
 
 vbas.on('connection', (socket) => {
   Max.post(`${socket.id} joined BASS. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
 
 vbar.on('connection', (socket) => {
   Max.post(`${socket.id} joined BARITONE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
 
 vten.on('connection', (socket) => {
   Max.post(`${socket.id} joined TENOR. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
 
 vcon.on('connection', (socket) => {
   Max.post(`${socket.id} joined CONTRALTO. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
 
 vmez.on('connection', (socket) => {
   Max.post(`${socket.id} joined MEZZO-SOP. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
 
 vsop.on('connection', (socket) => {
   Max.post(`${socket.id} joined SOPRANO. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
-});
-
-delay.on('connection', (socket) => {
-  Max.post(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
-});
-
-reverb.on('connection', (socket) => {
-  Max.post(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
-});
-
-noise.on('connection', (socket) => {
-  Max.post(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
 
 waveform.on('connection', (socket) => {
   Max.post(`${socket.id} joined WAVEFORM. ${io.engine.clientsCount} users connected`);
-  socket.onAny((event, args) => { Max.outlet(event, args); });
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+aenv.on('connection', (socket) => {
+  Max.post(`${socket.id} joined AMPENV. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+delay.on('connection', (socket) => {
+  Max.post(`${socket.id} joined DELAY. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+reverb.on('connection', (socket) => {
+  Max.post(`${socket.id} joined REVERB. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+noise.on('connection', (socket) => {
+  Max.post(`${socket.id} joined NOISE. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+filter.on('connection', (socket) => {
+  Max.post(`${socket.id} joined FILTER. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
+});
+
+fenv.on('connection', (socket) => {
+  Max.post(`${socket.id} joined FILENV. ${io.engine.clientsCount} users connected`);
+  socket.onAny((event, args) => { Max.outlet(args); });
 });
