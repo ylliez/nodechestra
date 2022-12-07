@@ -23,7 +23,7 @@ socket.on("accept", () => {
         noteDiv.setAttribute("class", "noteDiv");
         noteDiv.style.height = `${noteDivHeight}px`;
         noteDiv.style.bottom = `${noteDivHeight * i}px`;
-        noteDiv.style.backgroundColor = `hsl(${i * 360 / numberNotes}, 100%, 50%)`;
+        // noteDiv.style.backgroundColor = `hsl(${i * 360 / numberNotes}, 100%, 50%)`;
         noteDiv.innerHTML = `${notes.noteArray[i]}`
         voiceDiv.appendChild(noteDiv);
     }
@@ -56,7 +56,7 @@ socket.on("accept", () => {
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
         if (results.multiFaceLandmarks) {
             for (const landmarks of results.multiFaceLandmarks) {
-                drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#000' });
+                drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#15ff00' });
             }
             if (results.multiFaceLandmarks[0]) {
                 let lipTop = results.multiFaceLandmarks[0][13];
