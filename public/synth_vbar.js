@@ -64,10 +64,10 @@ socket.on("accept", () => {
                 let lipAp = lipBot.y - lipTop.y;
                 let lipMidX = Math.min(lipTop.x, lipBot.x) + Math.abs(lipTop.x - lipBot.x) / 2;
                 let lipMidY = lipTop.y + (lipAp / 2);
-                canvasCtx.fillStyle = "#FFF";
-                canvasCtx.beginPath();
-                canvasCtx.arc(lipMidX * width, lipMidY * height, 2, 0, 2 * Math.PI);
-                canvasCtx.fill();
+                // canvasCtx.fillStyle = "#15ff00";
+                // canvasCtx.beginPath();
+                // canvasCtx.arc(lipMidX * width, lipMidY * height, 2, 0, 2 * Math.PI);
+                // canvasCtx.fill();
 
                 // voiceMIDI = Math.round((1 - lipTop.y) * numberNotes) + startNote;
                 // EDIT: change to floor to avoid out of range errors

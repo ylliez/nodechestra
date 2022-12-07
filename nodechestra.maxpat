@@ -10,7 +10,7 @@
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 34.0, 79.0, 1135.0, 787.0 ],
+		"rect" : [ 34.0, 79.0, 1372.0, 787.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,21 @@
 		"subpatcher_template" : "",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontsize" : 52.0,
+					"id" : "obj-20",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1046.400015592575073, 312.000004649162292, 619.0, 65.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 775.200011551380157, 179.200002670288086, 619.0, 65.0 ],
+					"text" : "tinyurl.com/nodechestra",
+					"textcolor" : [ 1.0, 0.509803921568627, 0.984313725490196, 1.0 ]
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 1,
 					"id" : "obj-159",
@@ -252,8 +267,8 @@
 			}
 , 			{
 				"box" : 				{
-					"attack_time" : 406.0,
-					"decay_time" : 398.0,
+					"attack_time" : 359.0,
+					"decay_time" : 1.5,
 					"id" : "obj-55",
 					"maxclass" : "live.adsrui",
 					"numinlets" : 10,
@@ -262,8 +277,8 @@
 					"patching_rect" : [ 1197.586105889743521, 159.950111806428936, 189.000000000000057, 77.307223200725502 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 904.583333333333485, 444.499671721617119, 224.0, 128.307223200725502 ],
-					"release_time" : 795.0,
-					"sustain" : 0.434434434434434
+					"release_time" : 906.0,
+					"sustain" : 0.0
 				}
 
 			}
@@ -282,12 +297,13 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-52",
+					"linecount" : 2,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 7.5, 155.331023999999957, 50.0, 22.0 ],
-					"text" : "1 0 0"
+					"patching_rect" : [ 7.5, 155.331023999999957, 50.0, 35.0 ],
+					"text" : "2 50 0"
 				}
 
 			}
@@ -463,8 +479,8 @@
 			}
 , 			{
 				"box" : 				{
-					"attack_time" : 219.0,
-					"decay_time" : 671.0,
+					"attack_time" : 52.0,
+					"decay_time" : 219.0,
 					"id" : "obj-13",
 					"maxclass" : "live.adsrui",
 					"numinlets" : 10,
@@ -473,8 +489,8 @@
 					"patching_rect" : [ 393.804631370084849, 159.950111806428936, 189.000000000000057, 77.307223200725502 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 42.194440295299387, 557.087951761581394, 255.000000000000057, 112.307223200725502 ],
-					"release_time" : 466.0,
-					"sustain" : 0.765765765765766
+					"release_time" : 62.0,
+					"sustain" : 0.208208208208208
 				}
 
 			}
@@ -539,8 +555,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
@@ -563,7 +577,7 @@
 					"patching_rect" : [ 767.225180698764689, 78.103723406791687, 256.0, 128.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 617.111119409402136, 439.205695840826365, 256.0, 128.0 ],
-					"setfilter" : [ 0, 1, 1, 0, 0, 12538.0, 0.744443118572235, 0.772234439849854, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+					"setfilter" : [ 0, 1, 1, 0, 0, 19994.0, 0.744443118572235, 0.254264414310455, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 				}
 
 			}
@@ -673,22 +687,22 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1171.862035296581098, 607.189005037185211, 93.0, 22.0 ],
-					"text" : "1"
+					"text" : "0"
 				}
 
 			}
 , 			{
 				"box" : 				{
 					"id" : "obj-122",
-					"linecount" : 2,
+					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 1140.362035296581098, 541.189005037185211, 114.0, 35.0 ],
+					"patching_rect" : [ 1140.362035296581098, 541.189005037185211, 114.0, 49.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 432.25, 21.793975880790754, 370.0, 22.0 ],
-					"text" : "doesn't understand undefined"
+					"text" : "client ID: iZNB46jAqyzAKPlOAAAF"
 				}
 
 			}
@@ -700,7 +714,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 1113.862035296581098, 518.189005037185211, 120.0, 22.0 ],
-					"text" : "number"
+					"text" : "node.script"
 				}
 
 			}
@@ -1161,7 +1175,7 @@
 					"patching_rect" : [ 410.862035296581212, 584.190075198882028, 281.999999999999886, 22.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 432.25, 47.793975880790754, 370.0, 22.0 ],
-					"text" : "fil 0.79152 12538.91 0.772234"
+					"text" : "voice 2 50 0"
 				}
 
 			}
@@ -4129,8 +4143,6 @@
 					"saved_object_attributes" : 					{
 						"autostart" : 0,
 						"defer" : 0,
-						"node_bin_path" : "",
-						"npm_bin_path" : "",
 						"watch" : 0
 					}
 ,
