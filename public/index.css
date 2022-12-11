@@ -58,13 +58,14 @@ body {
 }
 
 .noteDiv {
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
     color: rgb(21, 255, 0);
     height: 4vh;
     width: 100vw;
     position: absolute;
     z-index: 1;
+    margin-left: 10px;
 }
 
 #canvas {

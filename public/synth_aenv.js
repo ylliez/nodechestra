@@ -10,7 +10,6 @@ socket.on("accept", () => {
     const captureElement = document.getElementById('capture');
     const canvasElement = document.getElementById('canvas');
     const canvasCtx = canvasElement.getContext('2d');
-    const uiElement = document.getElementById('uiDiv');
     let width = innerWidth, height = innerHeight;
     canvasElement.width = width;
     canvasElement.height = height;
@@ -90,8 +89,8 @@ socket.on("accept", () => {
         total = env.attack + env.decay + env.release + env.susW;
         // console.log(total)
         // console.log(width)
-        console.log(((env.attack / total) + (env.decay / total) + (env.susW / total) + (env.release / total)) * width)
-        console.log((env.attack / total * width) + (env.decay / total * width) + (env.susW / total * width) + (env.release / total * width))
+        // console.log(((env.attack / total) + (env.decay / total) + (env.susW / total) + (env.release / total)) * width)
+        // console.log((env.attack / total * width) + (env.decay / total * width) + (env.susW / total * width) + (env.release / total * width))
         current = 0;
         canvasCtx.beginPath();
         canvasCtx.moveTo(current, height);
@@ -107,7 +106,6 @@ socket.on("accept", () => {
         // Release
         canvasCtx.lineTo(current + (env.release / total * width), height);
         current += env.release / total * width;
-
         // stroke
         canvasCtx.lineWidth = 6;
         canvasCtx.strokeStyle = "rgb(21, 255, 0)";

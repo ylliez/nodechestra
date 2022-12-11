@@ -45,7 +45,7 @@ socket.on("accept", () => {
         if (handsOn) {
             for (let i = 0; i < handsOn; i++) {
                 let indexTip = results.multiHandLandmarks[i][8];
-                canvasCtx.fillStyle = "#000";
+                canvasCtx.fillStyle = "#15ff00";
                 canvasCtx.beginPath();
                 canvasCtx.arc(indexTip.x * width, indexTip.y * height, 10, 0, 2 * Math.PI);
                 canvasCtx.fill();

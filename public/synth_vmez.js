@@ -4,34 +4,31 @@ const socket = io("/vmez");
 socket.on("connect", () => { console.log(`client ID: ${socket.id}`); });
 // if namespace already in use, reroute to landing page (fallback of landing page button disabling)
 socket.on("reject", () => { window.location.assign("/"); })
-// otherwise, run synth component
+// otherwise, serve page
 socket.on("accept", () => {
-    // get & set UI elements
+    // get & set UI & UX elements
     const captureElement = document.getElementById('capture');
     const canvasElement = document.getElementById('canvas');
     const canvasCtx = canvasElement.getContext('2d');
     let width = innerWidth, height = innerHeight;
     canvasElement.width = width;
     canvasElement.height = height;
-
-    // mezzo-soprano : A3-F5
+    // create new object with indexed range of notes for:
+    // mezzo-soprano : A3-F5 (57-77) 21
     let notes = new Notes("A3", "F5");
-    let numberNotes = notes.numberNotes
-    let startNote = notes.startNote
-    let voiceMIDI = startNote, voiceVelocity = 0, voiceMIDIEx, voiceVelocityEx;
-    // make new div in voice div with height 1/25 of window height and of different color
+    let voiceMIDI, voiceMIDIEx;
+    // procedurally create note divs
     let voiceDiv = document.getElementById('voiceDiv')
-    let noteDivHeight = height / numberNotes
-    for (let i = 0; i < numberNotes; i++) {
+    let noteDivHeight = height / notes.numberNotes
+    for (let i = 0; i < notes.numberNotes; i++) {
         let noteDiv = document.createElement('div');
         noteDiv.setAttribute("class", "noteDiv");
         noteDiv.style.height = `${noteDivHeight}px`;
         noteDiv.style.bottom = `${noteDivHeight * i}px`;
-        noteDiv.style.backgroundColor = `hsl(${i * 360 / numberNotes}, 100%, 50%)`;
         noteDiv.innerHTML = `${notes.noteArray[i]}`
         voiceDiv.appendChild(noteDiv);
     }
-
+    // initialize MediaPipe FaceMesh, set options, and attach to camera
     const faceMesh = new FaceMesh({
         locateFile: (file) => {
             return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
@@ -45,7 +42,6 @@ socket.on("accept", () => {
         minTrackingConfidence: 0.5
     });
     faceMesh.onResults(onResults);
-
     const camera = new Camera(captureElement, {
         onFrame: async () => {
             await faceMesh.send({ image: captureElement });
@@ -54,29 +50,22 @@ socket.on("accept", () => {
         height: height
     });
     camera.start();
-
+    // utilize MediaPipe results for socket send data and canvas drawing
     function onResults(results) {
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
         if (results.multiFaceLandmarks) {
             for (const landmarks of results.multiFaceLandmarks) {
-                drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#000' });
+                // draw lip outline
+                drawConnectors(canvasCtx, landmarks, FACEMESH_LIPS, { color: '#15ff00' });
             }
             if (results.multiFaceLandmarks[0]) {
+                // determine mouth height, associate with MIDI value & send to socket
                 let lipTop = results.multiFaceLandmarks[0][13];
                 let lipBot = results.multiFaceLandmarks[0][14];
                 let lipAp = lipBot.y - lipTop.y;
-                let lipMidX = Math.min(lipTop.x, lipBot.x) + Math.abs(lipTop.x - lipBot.x) / 2;
                 let lipMidY = lipTop.y + (lipAp / 2);
-
-                canvasCtx.fillStyle = "#FFF";
-                canvasCtx.beginPath();
-                canvasCtx.arc(lipMidX * width, lipMidY * height, 2, 0, 2 * Math.PI);
-                canvasCtx.fill();
-
-                voiceMIDI = Math.floor((1 - lipTop.y) * numberNotes) + startNote;
-                voiceVelocity = lipAp * 1000
-
+                voiceMIDI = Math.floor((1 - lipMidY) * notes.numberNotes) + notes.startNote;
                 if (lipAp > 0.01) {
                     if (voiceMIDI != voiceMIDIEx) {
                         socket.emit("voice", `voice 5 ${voiceMIDIEx} 0`);

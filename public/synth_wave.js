@@ -60,8 +60,14 @@ socket.on("accept", () => {
     function onResults(results) {
         canvasCtx.save();
         canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
-        // video feed
+        // // video feed
         // canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+        // // draw hand landmarks (REQ SCRIPT: drawing_utils.js)
+        // if (results.multiHandLandmarks) {
+        //     for (const landmarks of results.multiHandLandmarks) {
+        //         drawConnectors(canvasCtx, landmarks, HAND_CONNECTIONS, { color: '#15FF00', lineWidth: 5 });
+        //     }
+        // }
         let handsOn = results.multiHandedness.length
         if (handsOn) {
             for (let i = 0; i < handsOn; i++) {
@@ -71,7 +77,7 @@ socket.on("accept", () => {
                     // console.log("right index tip: ", indexTip);
                     canvasCtx.fillStyle = "#f00";
                     canvasCtx.beginPath();
-                    canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
+                    canvasCtx.arc(indexTip.x * width, indexTip.y * height, 10, 0, 2 * Math.PI);
                     canvasCtx.fill();
                     waveSendVal = indexTipXNorm
                 }
@@ -79,7 +85,7 @@ socket.on("accept", () => {
                     // console.log("left index tip: ", indexTip);
                     canvasCtx.fillStyle = "#00f";
                     canvasCtx.beginPath();
-                    canvasCtx.arc(indexTip.x * width, indexTip.y * height, 20, 0, 2 * Math.PI);
+                    canvasCtx.arc(indexTip.x * width, indexTip.y * height, 10, 0, 2 * Math.PI);
                     canvasCtx.fill();
                     if (indexTipXNorm <= 0.75) { waveSendVal = 0.0; }
                     else if (indexTipXNorm > 0.75 && indexTipXNorm <= 1.5) { waveSendVal = 1.0; }
