@@ -1,6 +1,6 @@
 # Nodechestra
 ## Description
-*Nodechestra* is a participative motion-based online synthesizer, harnessing real-time web communication to engage multiple users in collaborative virtual sound-making. This project is inspired by the seemingly ineluctable societal progression of dematerialization - amplified by recent pandemic times - and is situated in the lineage of cadavre exquis, poietic generators and social (media) experiments, seeking to create space for reembodied collective online play.
+*Nodechestra* is a participative gesture-controlled online synthesizer, harnessing real-time web communication to engage multiple users in collaborative virtual sound-making. This project is inspired by the seemingly ineluctable societal progression of dematerialization - amplified by recent pandemic times - and is situated in the lineage of cadavre exquis, poietic generators and social (media) experiments, seeking to create space for reembodied collective online play.
 
 *Nodechestra* was built using [Node.js](https://nodejs.org/en/), an open-source JavaScript runtime providing a back-end server environment. Node supports the project’s basic server-client network architecture, consisting of an [Express.js](https://expressjs.com/) web application harnessing HTTP and WebSocket servers and framing URL routing. The built-in Node [HTTP module](https://nodejs.org/api/http.html) establishes the networked communication between the server and clients, while the WebSocket protocol, implemented here via individual [Socket.IO](https://socket.io/) libraries for server and client, enables sustained full-duplex communication between the two. *Nodechestra* is deployed as a web app using [Heroku](https://www.heroku.com/), a cloud application platform, enabling user access directly from their web browser.
 
@@ -8,6 +8,18 @@ The Node application captures user gestures using [MediaPipe](https://mediapipe.
 This data is then piped to a [Max/MSP](https://cycling74.com/products/max) patch via a Node-Max/MSP API. It is then routed to an ad hoc Max/MSP poly~ synthesizer, modulating its parameters.
 
 The synthesizer’s function is broken down into a set number of components (voices, waveform, amplitude envelope, reverb, etc..), which are parceled out to various eponymous client pages. The user triggers parameter changes using gestural control, the nature of which depends on their attributed parameter.
+
+## Instructions
+1. Download [project folder](https://github.com/ylliez/nodechestra) from GitHub
+2. Download [Max/MSP application](https://cycling74.com/downloads) (free trial)
+3. Open `nodechestra.maxpat` file
+4. Turn on DAC (button 1) 
+### Heroku deployment
+5. Start Node Heroku script (button 2)
+6. Launch [Heroku application](tinyurl.com/nodechestra) (button 3)
+### Localhost testing
+5. Start Node localhost script (button 2*) 
+6. Launch [localhost on port 4200](localhost:4200/) (button 3*)
 
 ## Components
 | name        | function                  | detail  | parameters                                 
@@ -33,20 +45,9 @@ The synthesizer’s function is broken down into a set number of components (voi
 | arpeggiator | arpeggiator parameters    |  hands  | RY: duty / LX: rate                              
 |             |                           |         |                              
 
-## Instructions
-1. Download [project folder](https://github.com/ylliez/nodechestra) from GitHub
-2. Download [Max/MSP application](https://cycling74.com/downloads) (free trial)
-3. Open `nodechestra.maxpat` file
-4. Turn on DAC (button 1) 
-### Heroku deployment
-5. Start Node Heroku script (button 2)
-6. Launch Heroku application (button 3)
-### Localhost testing
-5. Start Node localhost script (button 2*) 
-6. Launch localhost webpage (button 3*)
+## [Demo](https://youtu.be/ZL5iTugi0Ug)
 
 ## R&D
-
 ### [MediaPipe](https://google.github.io/mediapipe/)
 - Hands
     - [Hand implementation](https://google.github.io/mediapipe/solutions/hands)
@@ -129,3 +130,6 @@ const io = require("socket.io-client");
 // const socket = io("/max").connect('https://nodechestra.herokuapp.com');
 const socket = io("https://nodechestra.herokuapp.com/max");
 ```
+- [ ] landing page UI
+- [ ] on-page instructions?
+- [ ] waveform GUI
