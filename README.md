@@ -103,21 +103,21 @@ Bass | E2-E4 | 40-64 | 25
     - https://www.freecodecamp.org/news/build-a-realtime-chat-app-with-react-express-socketio-and-harperdb/
 
 ## Issues
-[x] component parcellation -> OK : resolved by socket.io implementation  
-[x] disconnect crash -> OK : resolved by socket.io implementation  
-[] s2c GUI value change -> NO : irrelevant due to compartmentalization => or not..  
-[] s2c audio feed -> NO : AFAIK not possible  
-[x] ML control -> OK : +/- implemented (debugging as aeternam)  
-[] Data control? -> TBD  
-[x] Actual client network access -> Heroku deployment of GitHub repo) => CSC  
-[x] routing : express routes || socket.io namespaces ->   
-[] namespaces vs. rooms  
-[x] attributing/serving pages : OK -> user choice (capped connections)  
-[] procedurally generating HTML/JS pages : EJS/React/Vue?         
-[] [clamp](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript) [values](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment)?  
-[x] draw UI elements of MediaPipe   
+- [x] component parcellation -> OK : resolved by socket.io implementation  
+- [x] disconnect crash -> OK : resolved by socket.io implementation  
+- [] s2c GUI value change -> NO : irrelevant due to compartmentalization => or not..  
+- [] s2c audio feed -> NO : AFAIK not possible  
+- [x] ML control -> OK : +/- implemented (debugging as aeternam)  
+- [] Data control? -> TBD  
+- [x] Actual client network access -> Heroku deployment of GitHub repo) => CSC  
+- [x] routing : express routes || socket.io namespaces ->   
+- [] namespaces vs. rooms  
+- [x] attributing/serving pages : OK -> user choice (capped connections)  
+- [] procedurally generating HTML/JS pages : EJS/React/Vue?         
+- [] [clamp](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript) [values](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment)?  
+- [x] draw UI elements of MediaPipe   
     - lips: https://github.com/google/mediapipe/issues/2040
-[x] Max/MSP client connection:  
+- [x] Max/MSP client connection:  
 ```
 const io = require("socket.io-client");
 // const socket = io('http://localhost:4200');
