@@ -10,7 +10,6 @@ This data is then piped to a [Max/MSP](https://cycling74.com/products/max) patch
 The synthesizer’s function is broken down into a set number of components (voices, waveform, amplitude envelope, reverb, etc..), which are parceled out to various eponymous client pages. The user triggers parameter changes using gestural control, the nature of which depends on their attributed parameter.
 
 ## Components
-
 | name        | function                  | detail  | parameters                                 
 | -           | -                         | -       | -                                     
 |             |                           |         |                                       
@@ -38,9 +37,13 @@ The synthesizer’s function is broken down into a set number of components (voi
 1. Download [project folder](https://github.com/ylliez/nodechestra) from GitHub
 2. Download [Max/MSP application](https://cycling74.com/downloads) (free trial)
 3. Open `nodechestra.maxpat` file
-4. Start Node script (button 1)
-5. Turn on DAC using (button 2) 
-6. Launch webpage (button 3)
+4. Turn on DAC (button 1) 
+### Heroku deployment
+5. Start Node Heroku script (button 2)
+6. Launch Heroku application (button 3)
+### Localhost testing
+5. Start Node localhost script (button 2*) 
+6. Launch localhost webpage (button 3*)
 
 ## R&D
 
