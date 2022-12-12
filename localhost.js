@@ -23,10 +23,9 @@ for (let i = 0; i < io_nsp.length; i++) {
   io_nsp[i] = io.of(`/${io_nsp_tag[i]}`);
   io_nsp[i].conns = 0;
 }
-let max = io.of('/max');
 
 io.on('connection', (socket) => {
-  console.log(`a new user joined. ${io.engine.clientsCount} clients connected`);
+  console.log(`a new user client joined. ${io.engine.clientsCount} clients connected`);
   for (let i = 0; i < io_nsp.length; i++) {
     if (io_nsp[i].conns >= 1) {
       socket.emit(`connFull`, `${io_nsp_tag[i]}`)
