@@ -16,10 +16,10 @@ The synthesizer’s function is broken down into a set number of components (voi
 4. Turn on DAC (button 1) 
 ### Heroku deployment
 5. Start Node Heroku script (button 2)
-6. Launch [Heroku application](tinyurl.com/nodechestra) (button 3)
+6. Launch Heroku application (button 3)
 ### Localhost testing
 5. Start Node localhost script (button 2*) 
-6. Launch [localhost on port 4200](localhost:4200/) (button 3*)
+6. Launch localhost on port 4200 (button 3*)
 
 ## Components
 | name        | function                  | detail  | parameters                                 
@@ -99,7 +99,7 @@ Bass | E2-E4 | 40-64 | 25
 
 ### Procedural page generation
 - [EJS](https://ejs.co/)
-- Vue
+- [Vue](https://vuejs.org/)
     - https://www.npmjs.com/package/vue-socket.io
     - https://deepinder.me/creating-a-real-time-chat-app-with-vue-socket-io-and-nodejs
     - https://blog.openreplay.com/rendering-real-time-data-with-vue-node-and-socket-io
