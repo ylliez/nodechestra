@@ -20,6 +20,9 @@ The synthesizer’s function is broken down into a set number of components (voi
 ### Localhost testing
 5. Start Node localhost script (button 2*) 
 6. Launch localhost on port 4200 (button 3*)
+### Audio issues
+7. Open Audio status window (button 9)
+8. Ensure 'Output Device' is set to your preferred output
 
 ## Components
 | name        | function                  | detail  | parameters                                 
