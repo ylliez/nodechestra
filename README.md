@@ -105,16 +105,16 @@ Bass | E2-E4 | 40-64 | 25
 ## Issues
 - [x] component parcellation -> OK : resolved by socket.io implementation  
 - [x] disconnect crash -> OK : resolved by socket.io implementation  
-- [] s2c GUI value change -> NO : irrelevant due to compartmentalization => or not..  
-- [] s2c audio feed -> NO : AFAIK not possible  
+- [ ] s2c GUI value change -> NO : irrelevant due to compartmentalization => or not..  
+- [ ] s2c audio feed -> NO : AFAIK not possible  
 - [x] ML control -> OK : +/- implemented (debugging as aeternam)  
-- [] Data control? -> TBD  
+- [ ] Data control? -> TBD  
 - [x] Actual client network access -> Heroku deployment of GitHub repo) => CSC  
 - [x] routing : express routes || socket.io namespaces ->   
-- [] namespaces vs. rooms  
+- [ ] namespaces vs. rooms  
 - [x] attributing/serving pages : OK -> user choice (capped connections)  
-- [] procedurally generating HTML/JS pages : EJS/React/Vue?         
-- [] [clamp](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript) [values](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment)?  
+- [ ] procedurally generating HTML/JS pages : EJS/React/Vue?         
+- [ ] [clamp](https://www.webtips.dev/webtips/javascript/how-to-clamp-numbers-in-javascript) [values](https://stackoverflow.com/questions/11409895/whats-the-most-elegant-way-to-cap-a-number-to-a-segment)?  
 - [x] draw UI elements of MediaPipe   
     - lips: https://github.com/google/mediapipe/issues/2040
 - [x] Max/MSP client connection:  
