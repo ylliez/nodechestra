@@ -25,6 +25,7 @@ The synthesizer’s function is broken down into a set number of components (voi
 8. Ensure 'Output Device' is set to your preferred output
 
 ## Components
+
 | name        | function                  | detail  | parameters                                 
 | -           | -                         | -       | -                                     
 |             |                           |         |                                       
@@ -65,6 +66,7 @@ The synthesizer’s function is broken down into a set number of components (voi
     - [Pose Codepen](https://codepen.io/mediapipe/pen/jOMbvxw)
 
 ### [Vocal Ranges](https://www.wikidoc.org/index.php/Vocal_range) & [MIDI equivalents](https://www.inspiredacoustics.com/en/MIDI_note_numbers_and_center_frequencies)
+
 | CHORAL | note | MIDI | # |  
 | - | - | - | - |
 Soprano | C4-A5 | 60-81 | 22
