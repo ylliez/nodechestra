@@ -29,7 +29,8 @@ The synthesizer’s function is broken down into a set number of components (voi
 ## Components
 
 | name        | function                  | detail  | parameters                       |          
-| -           | -                         | -       | -                                |     
+| -           | -                         | -       | -                                |        
+|             |                           |         |                                   
 | bass        | bass choral voice         |  mouth  | Y: frequency  / open: trigger         
 | baritone    | baritone choral voice     |  mouth  | Y: frequency  / open: trigger         
 | tenor       | tenor choral voice        |  mouth  | Y: frequency  / open: trigger         
