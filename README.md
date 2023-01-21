@@ -1,7 +1,7 @@
 # Nodechestra
 ## Description
 *Nodechestra* is a participative gesture-controlled online synthesizer, harnessing real-time web communication to engage multiple users in collaborative virtual sound-making. This project is inspired by the seemingly ineluctable societal progression of dematerialization - amplified by recent pandemic times - and is situated in the lineage of cadavre exquis, poietic generators and social (media) experiments, seeking to create space for reembodied collective online play.
-
+<br><br>![public/assets/nodechestra_doc_demo.png](public/assets/nodechestra_doc_demo.png)<br><br>
 *Nodechestra* was built using [Node.js](https://nodejs.org/en/), an open-source JavaScript runtime providing a back-end server environment. Node supports the project’s basic server-client network architecture, consisting of an [Express.js](https://expressjs.com/) web application harnessing HTTP and WebSocket servers and framing URL routing. The built-in Node [HTTP module](https://nodejs.org/api/http.html) establishes the networked communication between the server and clients, while the WebSocket protocol, implemented here via individual [Socket.IO](https://socket.io/) libraries for server and client, enables sustained full-duplex communication between the two. *Nodechestra* is deployed as a web app using [Heroku](https://www.heroku.com/), a cloud application platform, enabling user access directly from their web browser.
 
 The Node application captures user gestures using [MediaPipe](https://mediapipe.dev/), a framework supporting machine learning analysis of live media. In Nodechestra, this serves to recognize user body position and motion from their webcam feed, enabling somatic control of synthesizer parameters. 
